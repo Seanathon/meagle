@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset=utf-8>
+		<title>Mike Eagle</title>
+		<style>
+			body { 
+				font-family: 'TerminalGrotesqueRegular'; 
+			    font-weight: normal; 
+			    font-style: normal; 
+				margin: 0; 
+			}
+			canvas { 
+				width: 100%; 
+				height: 100%; 
+			}
+			nav {
+				position: absolute;
+				top: 0;
+				left: 50%;
+				width: 150px;
+				margin-left: -75px;
+				text-align: center;
+				z-index: 100;
+				display:block;
+				color: #000;
+				background-color: #fff;
+				height: 100vh;
+				max-height: 1.5rem;
+				overflow: hidden;
+				-webkit-transition: 320ms;
+				-moz-transition: 320ms;
+				-ms-transition: 320ms;
+				-o-transition: 320ms;
+				transition: 320ms;
+				
+			}
+			nav.open {
+				max-height: 1200px;
+				-webkit-transition: 320ms;
+				-moz-transition: 320ms;
+				-ms-transition: 320ms;
+				-o-transition: 320ms;
+				transition: 320ms;
+				
+			}
+			.menu {
+				list-style-type: none;
+				padding-left: 0;
+				margin-top: 10rem;
+			}
+			.menu li {
+				width: 100%;
+				line-height: 2.25em;
+			}
+			.menu li:hover {
+				background-color: #000;
+			}
+			.menu li a {
+				color: #000;
+				font-size: 2em;
+				text-decoration: none;
+				text-transform: uppercase;
+				font-weight: 300;
+				letter-spacing: 2px;
+			}
+			.menu li:hover a {
+				color: #fff;
+			}
+			button {
+				text-transform: uppercase;
+				width: 100%;
+				line-height: 1.25rem;
+				font-size: 0.8rem;
+				background-color: transparent;
+				border: 0;
+				cursor: pointer;
+				font-weight: 600;
+			}
+			button:focus {
+				outline: none;
+			}
+		</style>
+		<link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/terminal-grotesque" type="text/css"/>
+	</head>
+	<body>
+		<nav>
+			<button>Open Mike Eagle</button>
+
+			<ul class="menu">
+				<li><a href="listen.html">
+					Listen
+				</a></li>
+				<li><a href="watch.html">
+					Watch
+				</a></li>
+				<li><a href="shop.html">
+					Shop
+				</a></li>
+				<li><a href="blog.html">
+					Blog
+				</a></li>
+			</ul>
+		</nav>
+		<!-- <div id="info">Description</div> -->
+		<script
+		  src="https://code.jquery.com/jquery-3.2.0.min.js"
+		  integrity="sha256-JAW99MJVpJBGcbzEuXk4Az05s/XyDdBomFqNlM3ic+I="
+		  crossorigin="anonymous"></script>
+		<script src="js/three.js"></script>
+		<!-- <script src="js/ObjectLoader.js"></script> -->
+		<script src="js/MTLLoader.js"></script>
+		<script src="js/OBJLoader.js"></script>
+		<script src="js/OrbitControls.js"></script>
+		<script>
+			$('button').on('click', function() {
+				console.log('open');
+				$('nav').toggleClass('open');
+			});
+		</script>
+		<script>
+
+
+			// Our Javascript will go here.
+			var scene = new THREE.Scene( );
+				scene.fog = new THREE.FogExp2( 0x333333, 0.0009 );
+			var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 20000 );
+
+			var renderer = new THREE.WebGLRenderer( { antialias: true } );
+			renderer.setClearColor( 0x333333 );
+			renderer.setPixelRatio( window.devicePixelRatio );
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.body.appendChild( renderer.domElement );
+
+			// Update the viewport size and aspect ratio on resize
+			window.addEventListener( 'resize', function() {
+				var width = window.innerWidth;
+				var height = window.innerHeight;
+				renderer.setSize( width, height );
+				camera.aspect = width / height;
+				camera.updateProjectionMatrix();
+			} );
+
+			controls = new THREE.OrbitControls( camera, renderer.domElement );
+
+			// create the sphere
+			// var sphereGeometry = new THREE.SphereGeometry( 5, 32, 32 );
+			// var sphereMaterial = new THREE.MeshLambertMaterial( {color: 0xffff00} );
+			// var sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
+			// scene.add( sphere );
+			// sphere.position.set(0, -10, 0);
+
+			
+
+			// instantiate a loader
+			// var loader = new THREE.OBJLoader();
+			// var mtlLoader = new THREE.MTLLoader();
+			// mtlLoader.setPath('/objects/objects/objformat/building01a.obj')
+
+			// // load a resource
+			// loader.load(
+			// 	// resource URL
+			// 	'/objects/objects/objformat/building01a.obj',
+			// 	// Function when resource is loaded
+			// 	function ( object ) {
+			// 		scene.add( object );
+			// 	}
+			// );
+			var onProgress = function ( xhr ) {
+				if ( xhr.lengthComputable ) {
+					var percentComplete = xhr.loaded / xhr.total * 100;
+					console.log( Math.round(percentComplete, 2) + '% downloaded' );
+				}
+			};
+
+			var onError = function ( xhr ) { };
+
+			var mtlLoader = new THREE.MTLLoader();
+			// mtlLoader.setPath( '/objects/objects/objformat/' );
+			mtlLoader.setPath( 'obj/' );
+			mtlLoader.load( 'building.mtl', function( materials ) {
+
+				materials.preload();
+
+				var objLoader = new THREE.OBJLoader();
+				objLoader.setMaterials( materials );
+				// objLoader.setPath( '/objects/objects/objformat/' );
+				objLoader.setPath( 'obj/' );
+				objLoader.load( 'building.obj', function ( object ) {
+
+					object.position.x = - 350;
+					scene.add( object );
+
+				}, onProgress, onError );
+
+				objLoader.load( 'building.obj', function ( object ) {
+
+					// object.position.x = - 350;
+					scene.add( object );
+
+				}, onProgress, onError );
+
+				objLoader.load( 'building.obj', function ( object ) {
+
+					object.position.x = 350;
+					scene.add( object );
+
+				}, onProgress, onError );
+
+			});
+
+
+			// create the shape
+			// var geometry = new THREE.BoxGeometry( 2, 2, 2);	
+			// var cubeMaterials = [
+			// 	new THREE.MeshLambertMaterial( { color: 0xFFFFFF, side: THREE.DoubleSide } ),
+			// 	new THREE.MeshLambertMaterial( { map: new THREE.TextureLoader().load('img/IMG_9432.JPG'), side: THREE.DoubleSide } ),
+			// 	new THREE.MeshLambertMaterial( { map: new THREE.TextureLoader().load('img/jiyan.jpg'), side: THREE.DoubleSide } ),
+			// 	new THREE.MeshLambertMaterial( { map: new THREE.TextureLoader().load('img/jiyan_and_me.png'), side: THREE.DoubleSide } ),
+			// 	new THREE.MeshLambertMaterial( { map: new THREE.TextureLoader().load('img/iceland-sean-cliff-crpped.jpg'), side: THREE.DoubleSide } ),
+			// 	new THREE.MeshLambertMaterial( { map: new THREE.TextureLoader().load('img/jiyan.jpg'), side: THREE.DoubleSide } )
+			// ];
+			// create a material, color or image texture
+				// MeshBasicMaterial can be seen without lighting
+			// var material = new THREE.MeshLambertMaterial( { color: 0xFFFFFF, wireframe: false } );
+
+			// var texture = new THREE.MeshFaceMaterial( cubeMaterials );
+			// var cube = new THREE.Mesh( geometry, texture );
+			// var cube2 = new THREE.Mesh( geometry, material );
+			// var cube3 = new THREE.Mesh( geometry, material );
+			// var cube4 = new THREE.Mesh( geometry, material );
+			// scene.add( cube );
+			// scene.add( cube2 );
+			// scene.add( cube3 );
+			// scene.add( cube4 );
+
+			camera.position.z = 1000;
+
+			
+			var ambientLight = new THREE.AmbientLight( 0xFFFFFF, 0.75 );
+			scene.add( ambientLight );
+
+			var lightOne = new THREE.PointLight( 0x00FF40, 3, 50 );
+			// scene.add( lightOne );
+
+			var lightTwo = new THREE.PointLight( 0xFF0040, 1.5, 50 );
+			// scene.add( lightTwo );
+
+			var lightThree = new THREE.PointLight( 0x0040FF, 2, 50 );
+			// scene.add( lightThree );
+
+			var directionalLight = new THREE.DirectionalLight( 0xFFFFFF, 1);
+			directionalLight.position.set( 2, 1, 1 );
+			// scene.add( directionalLight );
+
+			var spotLight = new THREE.SpotLight( 0xFF45F6, 25 );
+			spotLight.position.set( 0, 3, 0 );
+			// scene.add( spotLight );
+
+			// game logic
+			var update = function() {
+				// cube.rotation.x += 0.02;
+				// cube.rotation.y += 0.01;
+
+				// var time = Date.now( ) * 0.0005;
+				// lightOne.position.x = Math.sin( time * 0.7 ) * 30;
+				// lightOne.position.y = Math.cos( time * 0.5 ) * 40;
+				// lightOne.position.z = Math.cos( time * 0.3 ) * 30;
+
+				// cube4.position.x = Math.sin( time * 0.7 ) * 30;
+				// cube4.position.y = Math.cos( time * 0.5 ) * 40;
+				// cube4.position.z = Math.cos( time * 0.3 ) * 30;
+
+				// lightTwo.position.x = Math.cos( time * 0.3 ) * 30;
+				// lightTwo.position.y = Math.sin( time * 0.5 ) * 40;
+				// lightTwo.position.z = Math.sin( time * 0.7 ) * 30;
+
+				// cube3.position.x = Math.cos( time * 0.3 ) * 30;
+				// cube3.position.y = Math.sin( time * 0.5 ) * 40;
+				// cube3.position.z = Math.sin( time * 0.7 ) * 30;
+
+				// lightThree.position.x = Math.sin( time * 0.7 ) * 30;
+				// lightThree.position.y = Math.cos( time * 0.3 ) * 40;
+				// lightThree.position.z = Math.sin( time * 0.5 ) * 30;
+
+				// cube2.position.x = Math.sin( time * 0.7 ) * 30;
+				// cube2.position.y = Math.cos( time * 0.3 ) * 40;
+				// cube2.position.z = Math.sin( time * 0.5 ) * 30;
+			}
+
+			// draw Scene
+			var render = function() {
+				renderer.render( scene, camera );
+			}
+
+			// run game loop (update, render, repeat)
+			var GameLoop = function() {
+				/* A game loop runs continuously during gameplay. Each turn of the loop, it processes user input without blocking, updates the game state, and renders the game. It tracks the passage of time to control the rate of gameplay. More info: http://gameprogrammingpatterns.com/game-loop.html */
+
+				requestAnimationFrame( GameLoop );
+				update( );
+				render( );
+			}
+
+			GameLoop();
+		</script>
+	</body>
+</html>

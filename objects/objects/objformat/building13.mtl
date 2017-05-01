@@ -1,0 +1,59 @@
+newmtl window
+Ka 0.8 0.8 0.8
+Kd 0 0 0
+Ks 0 0 0
+Ns 127
+newmtl window_chassis
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+newmtl banister
+Ka 0.8 0.8 0.8
+Kd 0.203922 0.203922 0.203922
+Ks 0 0 0
+Ns 127
+newmtl glass
+Ka 0.8 0.8 0.8
+Kd 0.666667 1 1
+Ks 0 0 0
+Ns 127
+newmtl floor_frame
+Ka 0.8 0.8 0.8
+Kd 0.843137 0.843137 0.843137
+Ks 0 0 0
+Ns 127
+newmtl floor_wall
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/building 13/maps/bricks__001x04.jpg
+newmtl floor_pavel
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/building 13/maps/tiles_floor007x04.jpg
+newmtl Material1
+Ka 0.8 0.8 0.8
+Kd 0.411765 0.384314 0.337255
+Ks 0 0 0
+Ns 127
+newmtl Material2
+Ka 0.8 0.8 0.8
+Kd 0.878431 0.878431 0.878431
+Ks 0 0 0
+Ns 127
+newmtl roof_frame
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/Programmi grafica/e-on software/Vue 7 Infinite/Bitmaps/PERSONALI_Bitmaps/3D Total/CD2/concrete/con003.jpg
+newmtl roof
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/e-on software/Vue 7 Infinite/PERSONALI_Scenes/WIP/000th environment/masks/textures/roof.jpg

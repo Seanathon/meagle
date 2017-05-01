@@ -1,0 +1,135 @@
+newmtl Material1
+Ka 0.8 0.8 0.8
+Kd 1 0.333333 0
+Ks 0 0 0
+Ns 127
+newmtl Material2
+Ka 0.8 0.8 0.8
+Kd 0.894118 0.741176 0.117647
+Ks 0 0 0
+Ns 127
+newmtl Material3
+Ka 0.8 0.8 0.8
+Kd 1 1 1
+Ks 0 0 0
+Ns 127
+newmtl Material4
+Ka 0.8 0.8 0.8
+Kd 0.152941 0.152941 0.152941
+Ks 0 0 0
+Ns 127
+newmtl Material5
+Ka 0.8 0.8 0.8
+Kd 0.101961 0.101961 0.101961
+Ks 0 0 0
+Ns 127
+newmtl Material6
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+newmtl Material7
+Ka 0.8 0.8 0.8
+Kd 0.290196 0.541176 0.223529
+Ks 0 0 0
+Ns 127
+newmtl Material8
+Ka 0.8 0.8 0.8
+Kd 0.152941 0.341176 0.690196
+Ks 0 0 0
+Ns 127
+newmtl panel
+Ka 0.8 0.8 0.8
+Kd 1 1 1
+Ks 0 0 0
+Ns 127
+newmtl console
+Ka 0.8 0.8 0.8
+Kd 0.658824 0.658824 0.658824
+Ks 0 0 0
+Ns 127
+newmtl window
+Ka 0.8 0.8 0.8
+Kd 0 0 0
+Ks 0 0 0
+Ns 127
+newmtl chassis
+Ka 0.8 0.8 0.8
+Kd 0.811765 0.819608 0.364706
+Ks 0 0 0
+Ns 127
+newmtl base_1
+Ka 0.8 0.8 0.8
+Kd 0.427451 0.427451 0.372549
+Ks 0 0 0
+Ns 127
+newmtl base_2
+Ka 0.8 0.8 0.8
+Kd 0.682353 0.682353 0.682353
+Ks 0 0 0
+Ns 127
+newmtl lights
+Ka 0.8 0.8 0.8
+Kd 0.988235 0.988235 0.988235
+Ks 0 0 0
+Ns 127
+newmtl signboard_label
+Ka 0.8 0.8 0.8
+Kd 0.0392157 0.0392157 0.0392157
+Ks 0 0 0
+Ns 127
+map_Kd textures/gas-price.jpg
+newmtl signboard_support
+Ka 0.8 0.8 0.8
+Kd 0.411765 0.4 0.372549
+Ks 0 0 0
+Ns 127
+newmtl desk
+Ka 0.8 0.8 0.8
+Kd 0.286275 0.286275 0.286275
+Ks 0 0 0
+Ns 127
+newmtl desk2
+Ka 0.8 0.8 0.8
+Kd 0.909804 0.909804 0.909804
+Ks 0 0 0
+Ns 127
+newmtl pole
+Ka 0.8 0.8 0.8
+Kd 0.996078 0.996078 0.996078
+Ks 0 0 0
+Ns 127
+newmtl logo
+Ka 1 1 1
+Kd 1 1 1
+Ks 0 0 0
+Ns 127
+map_Kd textures/Senza titolo-2.jpg
+newmtl gas_station1
+Ka 0.8 0.8 0.8
+Kd 0.392157 0.392157 0.392157
+Ks 0 0 0
+Ns 127
+newmtl gas_station2
+Ka 0.8 0.8 0.8
+Kd 0.94902 0.94902 0.94902
+Ks 0 0 0
+Ns 127
+newmtl label1
+Ka 1 1 1
+Kd 1 1 1
+Ks 0 0 0
+Ns 127
+map_Kd textures/Senza titolo-1.jpg
+newmtl self-service
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd textures/Senza titolo-3.jpg
+newmtl gas_console
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd textures/gas-console.jpg

@@ -1,0 +1,194 @@
+newmtl window
+Ka 0.8 0.8 0.8
+Kd 0 0 0
+Ks 0 0 0
+Ns 127
+newmtl window_chassis
+Ka 0.8 0.8 0.8
+Kd 0.129412 0.129412 0.129412
+Ks 0 0 0
+Ns 127
+newmtl shutters
+Ka 0.8 0.8 0.8
+Kd 0.960784 0.960784 0.960784
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/building 10/maps/DSCN06855.jpg
+newmtl floor_wall
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/building 10/maps/wallpaper004.jpg
+newmtl balcony_pavel
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/building 10/maps/tiles_wall008.jpg
+newmtl terrace_wall
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/building 10/maps/wallpaper004.jpg
+newmtl terrace_pavel
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/building 10/maps/gy003.jpg
+newmtl Material1
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/building 10/maps/yd2005[1].jpg
+newmtl window
+Ka 0.8 0.8 0.8
+Kd 0 0 0
+Ks 0 0 0
+Ns 127
+newmtl window_chassis
+Ka 0.8 0.8 0.8
+Kd 0.129412 0.129412 0.129412
+Ks 0 0 0
+Ns 127
+newmtl floor_wall
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/building 10/maps/wallpaper004.jpg
+newmtl shop_frame
+Ka 0.8 0.8 0.8
+Kd 0.831373 0.831373 0.831373
+Ks 0 0 0
+Ns 127
+newmtl shop_window_chassis
+Ka 0.8 0.8 0.8
+Kd 0.666667 0.666667 1
+Ks 0 0 0
+Ns 127
+newmtl shop_window_chassis
+Ka 0.8 0.8 0.8
+Kd 0 0.333333 0.498039
+Ks 0 0 0
+Ns 127
+newmtl shop_window_chassis
+Ka 0.8 0.8 0.8
+Kd 0.666667 0.333333 0.498039
+Ks 0 0 0
+Ns 127
+newmtl shop_window_chassis
+Ka 0.8 0.8 0.8
+Kd 0.666667 0.333333 0
+Ks 0 0 0
+Ns 127
+newmtl Material1
+Ka 0.8 0.8 0.8
+Kd 1 0.333333 0
+Ks 0 0 0
+Ns 127
+newmtl columns
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/building 10/maps/gy003.jpg
+newmtl Material2
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/signboards/cheap-toys-banner.jpg
+newmtl Material3
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/signboards/FastFoodCalorieCounter-700x100-banner.jpg
+newmtl Material4
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/signboards/bread-banner-770-140.jpg
+newmtl Material5
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/signboards/BrightIdeaEClubBannerGen620.jpg
+newmtl Material6
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/signboards/FINAL_Shopping_with_Cents_BlogBanner.jpg
+newmtl Material7
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/signboards/TMF_SlowFoodWeb_banner.jpg
+newmtl Material8
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/signboards/About_us_banner.jpg
+newmtl Material9
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/signboards/fast_food_banner.jpg
+newmtl Material10
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/signboards/Spring%20Floral%20Banner.jpg
+newmtl Material11
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/signboards/banner_small_dog_1.jpg
+newmtl Material12
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/signboards/ad_banner286.jpg
+newmtl Material13
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/signboards/343_0.jpg
+newmtl Material14
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/signboards/logo%20top.jpg
+newmtl Material15
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/signboards/015-banner.jpg
+newmtl Material16
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/signboards/K94CHXCANI4OKSCAV8FZO4CACEGYHUCA20QREGCA57FV3ACAHU5PB9CAVAUU76CAWFDWFHCAL0606TCAB63IEACAHBNBQSCA37DLCUCA20JAKJCA44K2PSCAMKU5N8CA8P5UMICA3WCIVACA0XVCYCCAUGPI6W.jpg
+newmtl Material17
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/signboards/banner.jpg

@@ -1,0 +1,149 @@
+newmtl window
+Ka 0.8 0.8 0.8
+Kd 0 0 0
+Ks 0 0 0
+Ns 127
+newmtl window_chassis
+Ka 0.8 0.8 0.8
+Kd 0.768627 0.768627 0.768627
+Ks 0 0 0
+Ns 127
+newmtl shutter
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+newmtl window_frame
+Ka 0.8 0.8 0.8
+Kd 0.870588 0.870588 0.870588
+Ks 0 0 0
+Ns 127
+newmtl banister
+Ka 0.8 0.8 0.8
+Kd 0.247059 0.2 0.180392
+Ks 0 0 0
+Ns 127
+newmtl building_bframe
+Ka 0.8 0.8 0.8
+Kd 1 0.85098 0
+Ks 0 0 0
+Ns 127
+newmtl building_wall
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+newmtl balcony_wall
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+newmtl balcony_pavel
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+newmtl window
+Ka 0.8 0.8 0.8
+Kd 0 0 0
+Ks 0 0 0
+Ns 127
+newmtl window_chassis
+Ka 0.8 0.8 0.8
+Kd 0.768627 0.768627 0.768627
+Ks 0 0 0
+Ns 127
+newmtl shutter
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+newmtl window_frame
+Ka 0.8 0.8 0.8
+Kd 0.870588 0.870588 0.870588
+Ks 0 0 0
+Ns 127
+newmtl banister
+Ka 0.8 0.8 0.8
+Kd 0.247059 0.2 0.180392
+Ks 0 0 0
+Ns 127
+newmtl building_bframe
+Ka 0.8 0.8 0.8
+Kd 1 0.85098 0
+Ks 0 0 0
+Ns 127
+newmtl building_wall
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+newmtl balcony_wall
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+newmtl balcony_pavel
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+newmtl plaster01
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/building 07/maps/re012.jpg
+newmtl plaster02
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/building 07/maps/pla001.jpg
+newmtl pavel01
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/building 07/maps/con004b.jpg
+newmtl pavel02
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/building 07/maps/bricks_001.jpg
+newmtl concrete
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/building 07/maps/con004.jpg
+newmtl shutters
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/building 07/maps/DSCN06855.jpg
+newmtl PAVEL03
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/building 07/maps/misc002x04.jpg
+newmtl Material1
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/building 07/maps/id2001[1].jpg
+newmtl awing_structure
+Ka 0.8 0.8 0.8
+Kd 0.65098 0.65098 0
+Ks 0 0 0
+Ns 127
+newmtl awning
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/building 07/maps/untitled28.jpg

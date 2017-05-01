@@ -1,0 +1,226 @@
+newmtl window
+Ka 0.8 0.8 0.8
+Kd 0 0 0
+Ks 0 0 0
+Ns 127
+newmtl window_chassis
+Ka 0.8 0.8 0.8
+Kd 0.560784 0.52549 0.482353
+Ks 0 0 0
+Ns 127
+newmtl shutter
+Ka 0.8 0.8 0.8
+Kd 1 0.666667 0
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/building 06/maps/DSCN06855.jpg
+newmtl banister
+Ka 0.8 0.8 0.8
+Kd 0.819608 0.819608 0.819608
+Ks 0 0 0
+Ns 127
+newmtl separator
+Ka 0.8 0.8 0.8
+Kd 0.333333 0.333333 0.247059
+Ks 0 0 0
+Ns 127
+newmtl glass_separator
+Ka 0.8 0.8 0.8
+Kd 0.654902 0.858824 0.866667
+Ks 0 0 0
+Ns 127
+newmtl frame_wall_01
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/building 06/maps/con002.jpg
+newmtl frame_wall_02
+Ka 0.8 0.8 0.8
+Kd 0.972549 0.972549 0.972549
+Ks 0 0 0
+Ns 127
+newmtl awing_structure
+Ka 0.8 0.8 0.8
+Kd 0.65098 0.65098 0
+Ks 0 0 0
+Ns 127
+newmtl floor_awning
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/building 06/maps/untitled27.jpg
+newmtl banister_grid
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/building 06/maps/banister grid.png
+newmtl floor_wall_03
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/building 06/maps/pla001.jpg
+newmtl floor_pavel
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/building 06/maps/tiles_floor006x04.jpg
+newmtl terrace_wall
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/building 06/maps/con002.jpg
+newmtl terrace_frame
+Ka 0.8 0.8 0.8
+Kd 0.972549 0.972549 0.972549
+Ks 0 0 0
+Ns 127
+newmtl cabin_door
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/building 06/maps/yd27ggron[1].jpg
+newmtl shop_frame
+Ka 0.8 0.8 0.8
+Kd 0.972549 0.972549 0.972549
+Ks 0 0 0
+Ns 127
+newmtl shop_window_chassis
+Ka 0.8 0.8 0.8
+Kd 0.352941 0.176471 0
+Ks 0 0 0
+Ns 127
+newmtl awning_structure
+Ka 0.8 0.8 0.8
+Kd 0.65098 0.65098 0
+Ks 0 0 0
+Ns 127
+newmtl awning01
+Ka 0.8 0.8 0.8
+Kd 0.666667 0.490196 0.517647
+Ks 0 0 0
+Ns 127
+newmtl awning02
+Ka 0.8 0.8 0.8
+Kd 0 0.333333 0.498039
+Ks 0 0 0
+Ns 127
+newmtl ground_floor_wall_02
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/building 06/maps/metals008x04.jpg
+newmtl chimney
+Ka 0.8 0.8 0.8
+Kd 0.262745 0.262745 0.262745
+Ks 0 0 0
+Ns 127
+newmtl mat-door1
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/building 06/maps/sdp86yd97g[1].jpg
+newmtl mat-door2
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/building 06/maps/sdp86yd97g[2].jpg
+newmtl signboards
+Ka 0.8 0.8 0.8
+Kd 1 1 1
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/signboards/343_0.jpg
+newmtl Material1
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/signboards/FINAL_Shopping_with_Cents_BlogBanner.jpg
+newmtl Material3
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/signboards/sogood-logo.png
+newmtl Material2
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/signboards/ClipBoard01.jpg
+newmtl Material4
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/signboards/nana_1.png
+newmtl Material5
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/signboards/Spring%20Floral%20Banner.jpg
+newmtl Material6
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/signboards/Go%20Shopping%20Banner.jpg
+newmtl Material7
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/signboards/shop-early-save-big.jpg
+newmtl Material8
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/signboards/Top_Banner.jpg
+newmtl Material9
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/signboards/BrightIdeaEClubBannerGen620.jpg
+newmtl Material10
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/signboards/SUO-Shop-Banner2.jpg
+newmtl Material11
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/signboards/K94CHXCANI4OKSCAV8FZO4CACEGYHUCA20QREGCA57FV3ACAHU5PB9CAVAUU76CAWFDWFHCAL0606TCAB63IEACAHBNBQSCA37DLCUCA20JAKJCA44K2PSCAMKU5N8CA8P5UMICA3WCIVACA0XVCYCCAUGPI6W.jpg
+newmtl Material12
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/signboards/Stamping_&_Shopping_Blog_Banner.png
+newmtl Material13
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/signboards/shopping-banner.jpg
+newmtl Material14
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/signboards/banner2.jpg

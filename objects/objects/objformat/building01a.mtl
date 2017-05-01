@@ -1,0 +1,208 @@
+newmtl frame
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+newmtl window
+Ka 0.8 0.8 0.8
+Kd 0 0 0
+Ks 0 0 0
+Ns 127
+newmtl balcony
+Ka 0.8 0.8 0.8
+Kd 1 1 1
+Ks 0 0 0
+Ns 127
+newmtl side_panel
+Ka 0.8 0.8 0.8
+Kd 0.560784 0.533333 0.509804
+Ks 0 0 0
+Ns 127
+newmtl balcony_structure
+Ka 0.8 0.8 0.8
+Kd 0.423529 0.388235 0.364706
+Ks 0 0 0
+Ns 127
+newmtl balcony_panel
+Ka 0.8 0.8 0.8
+Kd 0.317647 0.317647 0.317647
+Ks 0 0 0
+Ns 127
+newmtl window_frame
+Ka 0.8 0.8 0.8
+Kd 0.654902 0.654902 0.32549
+Ks 0 0 0
+Ns 127
+newmtl shutter_color
+Ka 0.8 0.8 0.8
+Kd 0.8 0.545098 0.478431
+Ks 0 0 0
+Ns 127
+newmtl awning_structure
+Ka 0.8 0.8 0.8
+Kd 0.611765 0.584314 0.380392
+Ks 0 0 0
+Ns 127
+newmtl awning_color
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.0941176
+Ks 0 0 0
+Ns 127
+newmtl roof_color
+Ka 0.8 0.8 0.8
+Kd 1 0.333333 0
+Ks 0 0 0
+Ns 127
+newmtl tettuccio
+Ka 0.8 0.8 0.8
+Kd 0.203922 0.188235 0.164706
+Ks 0 0 0
+Ns 127
+newmtl balcony_floor
+Ka 0.8 0.8 0.8
+Kd 0.603922 0.666667 0.521569
+Ks 0 0 0
+Ns 127
+newmtl ground
+Ka 0.8 0.8 0.8
+Kd 0.215686 0.168627 0.133333
+Ks 0 0 0
+Ns 127
+newmtl concrete_color
+Ka 0.8 0.8 0.8
+Kd 0.592157 0.580392 0.580392
+Ks 0 0 0
+Ns 127
+newmtl door_frame
+Ka 0.8 0.8 0.8
+Kd 0.835294 0.796078 0.643137
+Ks 0 0 0
+Ns 127
+newmtl tile1
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd ../textures/building01/bricks_004x16.jpg
+newmtl tile2
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd ../textures/building01/tiles_wall001x04.jpg
+newmtl concrete
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd ../textures/building01/con001b.jpg
+newmtl roof
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd ../textures/building01/tiles_roof005x04.jpg
+newmtl rolling_shutter
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd ../textures/building01/metals002.jpg
+newmtl grid
+Ka 0.8 0.8 0.8
+Kd 0 0.333333 0
+Ks 0 0 0
+Ns 127
+map_Kd ../textures/building01/grid.png
+newmtl signboard_frame
+Ka 0.8 0.8 0.8
+Kd 0.666667 0 0
+Ks 0 0 0
+Ns 127
+newmtl signboard_color
+Ka 0.8 0.8 0.8
+Kd 1 1 0
+Ks 0 0 0
+Ns 127
+newmtl grid_structure
+Ka 0.8 0.8 0.8
+Kd 0.207843 0.262745 0.215686
+Ks 0 0 0
+Ns 127
+newmtl awning
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd ../textures/building01/celtic_006.jpg
+newmtl shutters
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd ../textures/building01/DSCN06855.jpg
+newmtl signboard1
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd ../textures/building01/Neon.jpg
+newmtl signboard2
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd ../textures/building01/Cactus Motel.jpg
+newmtl shop_windows_frame
+Ka 0.8 0.8 0.8
+Kd 1 0.666667 0
+Ks 0 0 0
+Ns 127
+newmtl Material1
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd ../textures/ClipBoard01.jpg
+newmtl Material2
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd ../textures/BrightIdeaEClubBannerGen620.jpg
+newmtl Material3
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd ../textures/banner2.jpg
+newmtl Material4
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd ../textures/RealFood_Banner.jpg
+newmtl Material5
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd ../textures/Top_Banner.jpg
+newmtl Material6
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd ../textures/FINAL_Shopping_with_Cents_BlogBanner.jpg
+newmtl Material7
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd ../textures/TMF_SlowFoodWeb_banner.jpg
+newmtl Material8
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd ../textures/logotop.jpg

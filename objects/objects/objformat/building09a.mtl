@@ -1,0 +1,128 @@
+newmtl window
+Ka 0.8 0.8 0.8
+Kd 0 0 0
+Ks 0 0 0
+Ns 127
+newmtl window_chassis
+Ka 0.8 0.8 0.8
+Kd 0.47451 0.388235 0.32549
+Ks 0 0 0
+Ns 127
+newmtl floor_frame
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+newmtl shutters
+Ka 0.8 0.8 0.8
+Kd 0.717647 0.611765 0.290196
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/building 09/maps/DSCN06855.jpg
+newmtl ext_light
+Ka 0.8 0.8 0.8
+Kd 0.188235 0.188235 0.188235
+Ks 0 0 0
+Ns 127
+newmtl ext_light
+Ka 0.8 0.8 0.8
+Kd 1 1 0.498039
+Ks 0 0 0
+Ns 127
+newmtl floor_separator
+Ka 0.8 0.8 0.8
+Kd 0.478431 0.478431 0.478431
+Ks 0 0 0
+Ns 127
+newmtl glass
+Ka 0.8 0.8 0.8
+Kd 0.666667 1 1
+Ks 0 0 0
+Ns 127
+newmtl banister
+Ka 0.8 0.8 0.8
+Kd 0 0 0
+Ks 0 0 0
+Ns 127
+newmtl window_chassis
+Ka 0.8 0.8 0.8
+Kd 0.47451 0.388235 0.32549
+Ks 0 0 0
+Ns 127
+newmtl floor_frame
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+newmtl shutters
+Ka 0.8 0.8 0.8
+Kd 0.717647 0.611765 0.290196
+Ks 0 0 0
+Ns 127
+newmtl Material1
+Ka 0.8 0.8 0.8
+Kd 0.188235 0.188235 0.188235
+Ks 0 0 0
+Ns 127
+newmtl Material2
+Ka 0.8 0.8 0.8
+Kd 1 1 0.498039
+Ks 0 0 0
+Ns 127
+newmtl floor_wall
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/building 09/maps/brick10.jpg
+newmtl balcony_pavel
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/building 09/maps/tiles_wall002x04.jpg
+newmtl terrace_wall
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/building 09/maps/pai001.jpg
+newmtl Material3
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/building 09/maps/yd2008[1].jpg
+newmtl Material4
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/building 09/maps/japanese011.jpg
+newmtl Material5
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/building 09/maps/bricks_002x04.jpg
+newmtl awing_structure
+Ka 0.8 0.8 0.8
+Kd 0.65098 0.65098 0
+Ks 0 0 0
+Ns 127
+newmtl awning
+Ka 0.8 0.8 0.8
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+Ns 127
+map_Kd C:/LAVORI/Silo WIP/building 09/maps/untitled13.jpg
+newmtl chimney
+Ka 0.8 0.8 0.8
+Kd 0.262745 0.262745 0.262745
+Ks 0 0 0
+Ns 127
+newmtl entry
+Ka 0.8 0.8 0.8
+Kd 0.333333 0 0
+Ks 0 0 0
+Ns 127
