@@ -195,13 +195,14 @@
 			mtlLoader.load('building.mtl', function(materials) {
 				materials.preload();
 				var objLoader = new THREE.OBJLoader();
+				objLoader.setMaterials(materials);
 				objLoader.setPath('obj/');
 				objLoader.load('building.obj', function(object) {
 					object.traverse(function(child) {
 						if (child instanceof THREE.Mesh) {
 							//The child is the bit needed for the raycaster.intersectObject() method
 						}
-					})
+					});
 					// object.position.x = -350;
 					objects.push(object);
 					console.log(object);
