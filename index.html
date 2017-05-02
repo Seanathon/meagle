@@ -126,6 +126,7 @@
 			var onProgress, onError;
 			var update, render, GameLoop;
 			var raycaster, mouse, INTERSECTED;
+			var setMaterial;
 
 			scene = new THREE.Scene();
 			scene.fog = new THREE.FogExp2( 0x333333, 0.0009);
@@ -177,6 +178,20 @@
 				mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 				mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 			}
+			
+			function setMaterial(object, hex) {
+				var t = object.material.type.toString();
+
+				
+				if (t.localeCompare("MultiMaterial") == 0 ) {
+					INTERSECTED.currentHex = object.material.materials[0].color.getHex();
+					object.material.materials[0].color.setHex(hex)
+				}
+				else {
+					INTERSECTED.currentHex = object.material.color.getHex();
+					object.material.color.setHex(hex)
+				}
+			}
 
 			onProgress = function(xhr) {
 				if (xhr.lengthComputable) {
@@ -219,17 +234,21 @@
 				raycaster.setFromCamera( mouse, camera );
 
 				// calculate objects intersecting the picking ray
-				var intersects = raycaster.intersectObjects( scene.children );
-
+				var intersects = raycaster.intersectObjects( scene.children, true );
+				
+				
 				if ( intersects.length > 0 ) {
+				
+				console.log(intersects[ 0 ].object.material)
 					if ( INTERSECTED != intersects[ 0 ].object ) {
-						if ( INTERSECTED ) INTERSECTED.material.color.setHex( INTERSECTED.currentHex );
+						if (INTERSECTED) setMaterial( INTERSECTED, INTERSECTED.currentHex )
 						INTERSECTED = intersects[ 0 ].object;
-						INTERSECTED.currentHex = INTERSECTED.material.color.getHex();
-						INTERSECTED.material.color.setHex( 0xff0000 );
+						//INTERSECTED.currentHex = INTERSECTED.material.color.getHex();
+						//INTERSECTED.material.color.setHex( 0xff0000 );
+						setMaterial( INTERSECTED, 0xff0000 )
 					}
 				} else {
-					if ( INTERSECTED ) INTERSECTED.material.color.setHex( INTERSECTED.currentHex );
+					if (INTERSECTED) setMaterial( INTERSECTED, INTERSECTED.currentHex )
 					INTERSECTED = null;
 				}
 
@@ -244,5 +263,7 @@
 
 			window.addEventListener( 'mousemove', onMouseMove, false );
 			GameLoop();
+			
+			
 
 		</script>
