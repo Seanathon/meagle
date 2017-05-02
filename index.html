@@ -128,6 +128,8 @@
 			var raycaster, mouse, INTERSECTED;
 			var setMaterial;
 
+			var colorHash = {};
+			
 			scene = new THREE.Scene();
 			scene.fog = new THREE.FogExp2( 0x333333, 0.0009);
 
@@ -182,13 +184,33 @@
 			function setMaterial(object, hex) {
 				var t = object.material.type.toString();
 
+				if (hex == null) {
 				
+				colors = colorHash[INTERSECTED.uuid]
 				if (t.localeCompare("MultiMaterial") == 0 ) {
-					INTERSECTED.currentHex = object.material.materials[0].color.getHex();
-					object.material.materials[0].color.setHex(hex)
+						for (i = 0; i < object.material.materials.length; i++) {
+							object.material.materials[i].color.setHex(colors[i]);
+						}
+					}
+					else{
+						object.material.color.setHex(colors[0]);
+					}
+				}
+				else if (t.localeCompare("MultiMaterial") == 0 ) {
+					var materials = object.material.materials
+					colorHash[object.uuid] = materials.map(function(obj) { 
+					
+						return obj.color.getHex()
+					});
+					object.material.materials = materials.map(function(obj) { 
+						var newObj = obj
+						newObj.color.setHex(hex)
+						return newObj
+					});
+
 				}
 				else {
-					INTERSECTED.currentHex = object.material.color.getHex();
+					colorHash[object.uuid] = [object.material.color.getHex()];
 					object.material.color.setHex(hex)
 				}
 			}
@@ -239,16 +261,15 @@
 				
 				if ( intersects.length > 0 ) {
 				
-				console.log(intersects[ 0 ].object.material)
+				
 					if ( INTERSECTED != intersects[ 0 ].object ) {
 						if (INTERSECTED) setMaterial( INTERSECTED, INTERSECTED.currentHex )
 						INTERSECTED = intersects[ 0 ].object;
-						//INTERSECTED.currentHex = INTERSECTED.material.color.getHex();
-						//INTERSECTED.material.color.setHex( 0xff0000 );
+						
 						setMaterial( INTERSECTED, 0xff0000 )
 					}
 				} else {
-					if (INTERSECTED) setMaterial( INTERSECTED, INTERSECTED.currentHex )
+					if (INTERSECTED) setMaterial( INTERSECTED, null )
 					INTERSECTED = null;
 				}
 
