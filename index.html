@@ -107,6 +107,7 @@
 		  integrity="sha256-JAW99MJVpJBGcbzEuXk4Az05s/XyDdBomFqNlM3ic+I="
 		  crossorigin="anonymous"></script>
 		<script src="js/three.js"></script>
+		<script src="js/Tween.js"></script>
 		<script src="js/MTLLoader.js"></script>
 		<script src="js/OBJLoader.js"></script>
 		<script src="js/OrbitControls.js"></script>
@@ -138,10 +139,11 @@
 			renderer = new THREE.WebGLRenderer({
 				antialias: true
 			});
-			renderer.setClearColor(0x333333);
+			renderer.setClearColor(0xFFFFFF);
 			renderer.setPixelRatio(window.devicePixelRatio);
 			renderer.setSize(window.innerWidth, window.innerHeight);
-
+			renderer.shadowMapEnabled = true;
+			
 			floorMat = new THREE.MeshBasicMaterial({
 				color: 0xFFFFFF,
 				side: THREE.DoubleSide
@@ -150,10 +152,21 @@
 			floor = new THREE.Mesh(floorGeo, floorMat);
 			floor.position.y = -0.5;
 			floor.rotation.x = Math.PI / 2;
-			scene.add(floor);
+			//scene.add(floor);
 
 			ambientLight = new THREE.AmbientLight( 0xFFFFFF, 0.75 );
-			scene.add( ambientLight );
+			
+			var directionalLight = new THREE.DirectionalLight( 0xffffff, 1.0);
+			directionalLight.castShadow = true;
+			directionalLight.shadowDarkness = 1.0;
+			directionalLight.shadowCameraVisible = true;
+			
+			directionalLight.position.set( 1000, 150, 1000 );
+			directionalLight.target.position.set( 0, 0, 0 );
+			
+			scene.add( directionalLight );
+			
+		//	scene.add( ambientLight );
 
 			document.body.appendChild(renderer.domElement);
 
@@ -165,9 +178,29 @@
 				camera.updateProjectionMatrix();
 			})
 
-			camera.position.z = 1000;
-
+			camera.position.z = 10000;
+			camera.position.x = 0;
+			camera.position.y = 20;
+			camera.lookAt(new THREE.Vector3())
 			controls = new THREE.OrbitControls(camera,renderer.domElement);
+			
+			new TWEEN.Tween( camera.position ).to( {
+						x: 0,
+						y: 20,
+						z: 120}, 4000 )
+					.easing( TWEEN.Easing.Quadratic.Out).start();
+
+			
+			/*
+new TWEEN.Tween( controls.target ).to( {
+				x: 0,
+				y: 100,
+				z: 0}, 4000 )
+				.easing( TWEEN.Easing.Quadratic.Out).start();
+*/
+
+			
+			
 
 			raycaster = new THREE.Raycaster();
 			mouse = new THREE.Vector2();
@@ -234,10 +267,14 @@
 				var objLoader = new THREE.OBJLoader();
 				objLoader.setMaterials(materials);
 				objLoader.setPath('obj/');
-				objLoader.load('building.obj', function(object) {
+				objLoader.load('citty.obj', function(object) {
 					object.traverse(function(child) {
 						if (child instanceof THREE.Mesh) {
 							//The child is the bit needed for the raycaster.intersectObject() method
+						}
+						if (child instanceof THREE.Object3D) {
+							child.castShadow = true;
+							child.receiveShadow = true;
 						}
 					});
 					// object.position.x = -350;
@@ -252,6 +289,8 @@
 			}
 
 			render = function() {
+			
+				TWEEN.update();
 				// update the picking ray with the camera and mouse position
 				raycaster.setFromCamera( mouse, camera );
 
