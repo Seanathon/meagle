@@ -110,6 +110,7 @@
 		<script src="js/Tween.js"></script>
 		<script src="js/MTLLoader.js"></script>
 		<script src="js/OBJLoader.js"></script>
+		<script src="js/ColladaLoader.js"></script>
 		<script src="js/OrbitControls.js"></script>
 		<script src="js/Projector.js"></script>
 		<script>
@@ -142,7 +143,7 @@
 			renderer.setClearColor(0xFFFFFF);
 			renderer.setPixelRatio(window.devicePixelRatio);
 			renderer.setSize(window.innerWidth, window.innerHeight);
-			renderer.shadowMapEnabled = true;
+			renderer.shadowMap.enabled = true;
 			
 			floorMat = new THREE.MeshBasicMaterial({
 				color: 0xFFFFFF,
@@ -157,16 +158,14 @@
 			ambientLight = new THREE.AmbientLight( 0xFFFFFF, 0.75 );
 			
 			var directionalLight = new THREE.DirectionalLight( 0xffffff, 1.0);
-			directionalLight.castShadow = true;
-			directionalLight.shadowDarkness = 1.0;
-			directionalLight.shadowCameraVisible = true;
+			//directionalLight.castShadow = true;
 			
 			directionalLight.position.set( 1000, 150, 1000 );
 			directionalLight.target.position.set( 0, 0, 0 );
 			
 			scene.add( directionalLight );
 			
-		//	scene.add( ambientLight );
+			scene.add( ambientLight );
 
 			document.body.appendChild(renderer.domElement);
 
@@ -178,17 +177,19 @@
 				camera.updateProjectionMatrix();
 			})
 
-			camera.position.z = 10000;
+			camera.position.z = 120;
 			camera.position.x = 0;
 			camera.position.y = 20;
 			camera.lookAt(new THREE.Vector3())
 			controls = new THREE.OrbitControls(camera,renderer.domElement);
 			
-			new TWEEN.Tween( camera.position ).to( {
+			/*
+new TWEEN.Tween( camera.position ).to( {
 						x: 0,
 						y: 20,
 						z: 120}, 4000 )
 					.easing( TWEEN.Easing.Quadratic.Out).start();
+*/
 
 			
 			/*
@@ -247,42 +248,25 @@ new TWEEN.Tween( controls.target ).to( {
 					object.material.color.setHex(hex)
 				}
 			}
+			
+			
+			
+			var loader = new THREE.ColladaLoader();
 
-			onProgress = function(xhr) {
-				if (xhr.lengthComputable) {
-					var percentComplete = xhr.loaded / xhr.total * 100;
-					console.log(Math.round(percentComplete, 2) + '% downloaded');
-				}
-			}
+loader.load(
+	// resource URL
+	'models/LOWPOLYLAND.dae',
+	// Function when resource is loaded
+	function ( collada ) {
+		scene.add( collada.scene );
+	},
+	// Function called when download progresses
+	function ( xhr ) {
+		console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+	}
+);
 
-			onError = function(xhr) {
 
-			};
-
-			mtlLoader = new THREE.MTLLoader();
-			objects = [];
-			mtlLoader.setPath('obj/');
-			mtlLoader.load('building.mtl', function(materials) {
-				materials.preload();
-				var objLoader = new THREE.OBJLoader();
-				objLoader.setMaterials(materials);
-				objLoader.setPath('obj/');
-				objLoader.load('citty.obj', function(object) {
-					object.traverse(function(child) {
-						if (child instanceof THREE.Mesh) {
-							//The child is the bit needed for the raycaster.intersectObject() method
-						}
-						if (child instanceof THREE.Object3D) {
-							child.castShadow = true;
-							child.receiveShadow = true;
-						}
-					});
-					// object.position.x = -350;
-					objects.push(object);
-					console.log(object);
-					scene.add(objects[0]);
-				}, onProgress, onError);
-			});
 
 			update = function() {
 
@@ -302,13 +286,25 @@ new TWEEN.Tween( controls.target ).to( {
 				
 				
 					if ( INTERSECTED != intersects[ 0 ].object ) {
-						if (INTERSECTED) setMaterial( INTERSECTED, INTERSECTED.currentHex )
+						//if (INTERSECTED) setMaterial( INTERSECTED, INTERSECTED.currentHex )
 						INTERSECTED = intersects[ 0 ].object;
+ 						if (INTERSECTED.name.indexOf('s_') == 0) {
 						
-						setMaterial( INTERSECTED, 0xff0000 )
+						var pos = INTERSECTED.position
+						new TWEEN.Tween( INTERSECTED.position ).to( {
+						x: pos.x,
+						y: pos.y + 10,
+						z: pos.z}, 400 )
+					.yoyo( true )
+					.repeat( 1 )
+					.easing( TWEEN.Easing.Quadratic.Out)
+					.start();
+						
+						//setMaterial( INTERSECTED, 0xff0000 )
+						}
 					}
 				} else {
-					if (INTERSECTED) setMaterial( INTERSECTED, null )
+				//	if (INTERSECTED) setMaterial( INTERSECTED, null )
 					INTERSECTED = null;
 				}
 
