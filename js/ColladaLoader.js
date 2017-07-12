@@ -1134,8 +1134,6 @@ THREE.ColladaLoader = function () {
 
 				if ( !geometry.mesh || !geometry.mesh.primitives )
 					continue;
-					
-				
 
 				if ( obj.name.length === 0 ) {
 
@@ -1181,7 +1179,7 @@ THREE.ColladaLoader = function () {
 				}
 
 				var mesh;
-				var material = first_material || new THREE.MeshStandardMaterial( { color: 0xdddddd, roughness: 1.0, side: geometry.doubleSided ? THREE.DoubleSide : THREE.FrontSide } );
+				var material = first_material || new THREE.MeshLambertMaterial( { color: 0xdddddd, side: geometry.doubleSided ? THREE.DoubleSide : THREE.FrontSide } );
 				var geom = geometry.mesh.geometry3js;
 
 				if ( num_materials > 1 ) {
@@ -2748,8 +2746,6 @@ THREE.ColladaLoader = function () {
 				case 'mesh':
 
 					this.mesh = (new Mesh(this)).parse(child);
-					this.mesh.castShadow = true;
-					this.mesh.receiveShadow = true;
 					break;
 
 				case 'extra':
@@ -3836,19 +3832,19 @@ THREE.ColladaLoader = function () {
 			case 'constant':
 
 				if (props.emissive != undefined) props.color = props.emissive;
-				this.material = new THREE.MeshStandardMaterial( props );
+				this.material = new THREE.MeshBasicMaterial( props );
 				break;
 
 			case 'phong':
 			case 'blinn':
 
-				this.material = new THREE.MeshStandardMaterial( props );
+				this.material = new THREE.MeshPhongMaterial( props );
 				break;
 
 			case 'lambert':
 			default:
 
-				this.material = new THREE.MeshStandardMaterial( props );
+				this.material = new THREE.MeshLambertMaterial( props );
 				break;
 
 		}
