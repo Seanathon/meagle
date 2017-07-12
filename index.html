@@ -113,6 +113,7 @@
 		<script src="js/ColladaLoader.js"></script>
 		<script src="js/OrbitControls.js"></script>
 		<script src="js/Projector.js"></script>
+		<script src="js/dat.gui.min.js"></script>
 		<script>
 			$('button').on('click', function() {
 				console.log('open');
@@ -132,6 +133,10 @@
 
 			var colorHash = {};
 			
+			var gui;
+			
+			
+			
 			scene = new THREE.Scene();
 			scene.fog = new THREE.FogExp2( 0x333333, 0.0009);
 
@@ -144,6 +149,9 @@
 			renderer.setPixelRatio(window.devicePixelRatio);
 			renderer.setSize(window.innerWidth, window.innerHeight);
 			renderer.shadowMap.enabled = true;
+			renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+			renderer.gammaInput = true;
+			renderer.gammaOutput = true;
 			
 			floorMat = new THREE.MeshBasicMaterial({
 				color: 0xFFFFFF,
@@ -155,17 +163,42 @@
 			floor.rotation.x = Math.PI / 2;
 			//scene.add(floor);
 
-			ambientLight = new THREE.AmbientLight( 0xFFFFFF, 0.75 );
+			///ambientLight = new THREE.AmbientLight( 0xFFFFFF, 0.75 );
 			
-			var directionalLight = new THREE.DirectionalLight( 0xffffff, 1.0);
+			var directionalLight = new THREE.DirectionalLight( 0xffffff, 1.0, 100);
 			//directionalLight.castShadow = true;
-			
-			directionalLight.position.set( 1000, 150, 1000 );
-			directionalLight.target.position.set( 0, 0, 0 );
+			/*
+
+			directionalLight.position.set( params.lightx, params.lighty, params.lightz);
+			directionalLight.target.position.set( 0, 100, 0 );
 			
 			scene.add( directionalLight );
 			
-			scene.add( ambientLight );
+			directionalLight.shadow.mapSize.width = 512;  // default
+			directionalLight.shadow.mapSize.height = 512; // default
+			directionalLight.shadow.camera.near = 0.5;       // default
+			directionalLight.shadow.camera.far = 500  
+*/
+			
+			
+		var spotLight = new THREE.SpotLight( 0xffffff );
+
+spotLight.position.y = 80;
+spotLight.penumbra = 0.2;
+spotLight.castShadow = true;
+
+spotLight.shadow.mapSize.width = 1024;
+spotLight.shadow.mapSize.height = 1024;
+
+spotLight.shadow.camera.near = 500;
+spotLight.shadow.camera.far = 4000;
+spotLight.shadow.camera.fov = 30;
+
+scene.add( spotLight );	
+			
+		
+			
+			//scene.add( ambientLight );
 
 			document.body.appendChild(renderer.domElement);
 
@@ -258,6 +291,17 @@ loader.load(
 	'models/LOWPOLYLAND.dae',
 	// Function when resource is loaded
 	function ( collada ) {
+	
+		collada.scene.traverse( function(child) {
+			if (child instanceof THREE.Mesh) {
+
+		
+
+				// enable casting shadows
+				child.castShadow = true;
+				child.receiveShadow = true;
+			}
+		});
 		scene.add( collada.scene );
 	},
 	// Function called when download progresses
@@ -273,6 +317,7 @@ loader.load(
 			}
 
 			render = function() {
+			
 			
 				TWEEN.update();
 				// update the picking ray with the camera and mouse position
@@ -321,5 +366,79 @@ loader.load(
 			GameLoop();
 			
 			
+			function buildGui() {
+
+				gui = new dat.GUI();
+
+				var params = {
+					light_x : 0,
+					light_y : 100,
+					light_z : 0,
+					'light color': spotLight.color.getHex(),
+					intensity: spotLight.intensity,
+					distance: spotLight.distance,
+					angle: spotLight.angle,
+					penumbra: spotLight.penumbra,
+					decay: spotLight.decay
+				}
+				
+				gui.add(params, 'light_x').min(-256).max(256).step(1).onChange( function ( val ) {
+					spotLight.position.x = val
+				});
+				gui.add(params, 'light_y').min(-256).max(256).step(1).onChange( function ( val ) {
+					spotLight.position.y = val
+				});
+				gui.add(params, 'light_z').min(-256).max(256).step(1).onChange( function ( val ) {
+					spotLight.position.z = val
+				});
+
+				gui.addColor( params, 'light color' ).onChange( function ( val ) {
+
+					spotLight.color.setHex( val );
+					render();
+
+				} );
+
+				gui.add( params, 'intensity', 0, 2 ).onChange( function ( val ) {
+
+					spotLight.intensity = val;
+					render();
+
+				} );
+
+
+				gui.add( params, 'distance', 50, 200 ).onChange( function ( val ) {
+
+					spotLight.distance = val;
+					render();
+
+				} );
+
+				gui.add( params, 'angle', 0, Math.PI / 3 ).onChange( function ( val ) {
+
+					spotLight.angle = val;
+					render();
+
+				} );
+
+				gui.add( params, 'penumbra', 0, 1 ).onChange( function ( val ) {
+
+					spotLight.penumbra = val;
+					render();
+
+				} );
+
+				gui.add( params, 'decay', 1, 2 ).onChange( function ( val ) {
+
+					spotLight.decay = val;
+					render();
+
+				} );
+
+				gui.open();
+
+			}
+			
+			buildGui();
 
 		</script>
