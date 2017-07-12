@@ -150,8 +150,7 @@
 			renderer.setSize(window.innerWidth, window.innerHeight);
 			renderer.shadowMap.enabled = true;
 			renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-			renderer.gammaInput = true;
-			renderer.gammaOutput = true;
+			
 			
 			floorMat = new THREE.MeshBasicMaterial({
 				color: 0xFFFFFF,
@@ -165,34 +164,36 @@
 
 			///ambientLight = new THREE.AmbientLight( 0xFFFFFF, 0.75 );
 			
-			var directionalLight = new THREE.DirectionalLight( 0xffffff, 1.0, 100);
-			//directionalLight.castShadow = true;
-			/*
-
-			directionalLight.position.set( params.lightx, params.lighty, params.lightz);
-			directionalLight.target.position.set( 0, 100, 0 );
 			
-			scene.add( directionalLight );
-			
-			directionalLight.shadow.mapSize.width = 512;  // default
-			directionalLight.shadow.mapSize.height = 512; // default
-			directionalLight.shadow.camera.near = 0.5;       // default
-			directionalLight.shadow.camera.far = 500  
-*/
-			
+		
 			
 		var spotLight = new THREE.SpotLight( 0xffffff );
 
 spotLight.position.y = 80;
 spotLight.penumbra = 0.2;
-spotLight.castShadow = true;
 
+	spotLight.castShadow = true;
+
+				spotLight.shadow.mapSize.width = 2048;  // default
+				spotLight.shadow.mapSize.height = 2048; // default
+				spotLight.shadow.camera.near = 0.5;       // default
+				spotLight.shadow.camera.far = 300;      // default
+			
+				
+				
+				var helper = new THREE.CameraHelper( spotLight.shadow.camera );
+scene.add( helper );
+
+/*
 spotLight.shadow.mapSize.width = 1024;
 spotLight.shadow.mapSize.height = 1024;
+*/
 
+/*
 spotLight.shadow.camera.near = 500;
 spotLight.shadow.camera.far = 4000;
 spotLight.shadow.camera.fov = 30;
+*/
 
 scene.add( spotLight );	
 			
@@ -291,18 +292,24 @@ loader.load(
 	'models/LOWPOLYLAND.dae',
 	// Function when resource is loaded
 	function ( collada ) {
-	
-		collada.scene.traverse( function(child) {
-			if (child instanceof THREE.Mesh) {
-
+		dae = collada.scene
+		dae.traverse( function(child) {
 		
+		console.log(child.children)
+		child.castShadow = true;
+		child.receiveShadow = true;
+		console.log(child.name)
+		if( child.material ) {
+      	  child.material.side = THREE.DoubleSide;
+		}
+		
+		daemesh = dae.children[1];
+daemesh.castShadow = true;
+daemesh.receiveShadow = true;
 
-				// enable casting shadows
-				child.castShadow = true;
-				child.receiveShadow = true;
-			}
+			
 		});
-		scene.add( collada.scene );
+		scene.add( dae );
 	},
 	// Function called when download progresses
 	function ( xhr ) {
