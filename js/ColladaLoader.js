@@ -3826,7 +3826,10 @@ THREE.ColladaLoader = function () {
 			delete props.diffuse;
 
 		}
-
+		console.log(this)
+		console.log(this.type)
+		console.log(props)
+		console.log("-----------------")
 		switch ( this.type ) {
 
 			case 'constant':

@@ -286,6 +286,7 @@ new TWEEN.Tween( controls.target ).to( {
 			
 			
 			var loader = new THREE.ColladaLoader();
+			var intersectable = [];
 
 loader.load(
 	// resource URL
@@ -295,19 +296,16 @@ loader.load(
 		dae = collada.scene
 		dae.traverse( function(child) {
 		
-		console.log(child.children)
-		child.castShadow = true;
-		child.receiveShadow = true;
-		console.log(child.name)
-		if( child.material ) {
-      	  child.material.side = THREE.DoubleSide;
-		}
-		
-		daemesh = dae.children[1];
-daemesh.castShadow = true;
-daemesh.receiveShadow = true;
-
-			
+			console.log(child.children)
+			child.castShadow = true;
+			child.receiveShadow = true;
+			if(child.name.indexOf('s_') == 0){
+				child.userData = { hovered: false };
+				intersectable.push(child)
+			}
+			if( child.material ) {
+	      	  child.material.side = THREE.DoubleSide;
+			}
 		});
 		scene.add( dae );
 	},
@@ -331,29 +329,30 @@ daemesh.receiveShadow = true;
 				raycaster.setFromCamera( mouse, camera );
 
 				// calculate objects intersecting the picking ray
-				var intersects = raycaster.intersectObjects( scene.children, true );
+				var intersects = raycaster.intersectObjects( intersectable, true );
 				
 				
 				if ( intersects.length > 0 ) {
 				
-				
+					
 					if ( INTERSECTED != intersects[ 0 ].object ) {
 						//if (INTERSECTED) setMaterial( INTERSECTED, INTERSECTED.currentHex )
 						INTERSECTED = intersects[ 0 ].object;
- 						if (INTERSECTED.name.indexOf('s_') == 0) {
+ 						if (INTERSECTED.parent.userData.hovered == false) {
 						
-						var pos = INTERSECTED.position
-						new TWEEN.Tween( INTERSECTED.position ).to( {
-						x: pos.x,
-						y: pos.y + 10,
-						z: pos.z}, 400 )
-					.yoyo( true )
-					.repeat( 1 )
-					.easing( TWEEN.Easing.Quadratic.Out)
-					.start();
+						var bounce = function(obj) {
+							obj.parent.userData.hovered = true
+							new TWEEN.Tween( obj.position ).to( { y: [500,0] }, 400 )
+							.easing( TWEEN.Easing.Quadratic.Out)
+							.onComplete(function() {
+								obj.parent.userData.hovered = false
+							})
+							.start();
+						};
+						bounce(INTERSECTED)
 						
-						//setMaterial( INTERSECTED, 0xff0000 )
 						}
+					
 					}
 				} else {
 				//	if (INTERSECTED) setMaterial( INTERSECTED, null )
@@ -414,7 +413,7 @@ daemesh.receiveShadow = true;
 				} );
 
 
-				gui.add( params, 'distance', 50, 200 ).onChange( function ( val ) {
+				gui.add( params, 'distance', 50, 300 ).onChange( function ( val ) {
 
 					spotLight.distance = val;
 					render();
