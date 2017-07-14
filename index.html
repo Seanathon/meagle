@@ -384,7 +384,17 @@ loader.load(
 			update = function() {
 
 			}
-
+			
+			
+			var bounce = function(obj) {
+							obj.parent.userData.hovered = true
+							new TWEEN.Tween( obj.position ).to( { y: [500,0] }, 400 )
+							.easing( TWEEN.Easing.Quadratic.Out)
+							.onComplete(function() {
+								obj.parent.userData.hovered = false
+							})
+							.start();
+						};
 			render = function() {
 			
 			
@@ -404,15 +414,7 @@ loader.load(
 						INTERSECTED = intersects[ 0 ].object;
  						if (INTERSECTED.parent.userData.hovered == false) {
 						
-						var bounce = function(obj) {
-							obj.parent.userData.hovered = true
-							new TWEEN.Tween( obj.position ).to( { y: [500,0] }, 400 )
-							.easing( TWEEN.Easing.Quadratic.Out)
-							.onComplete(function() {
-								obj.parent.userData.hovered = false
-							})
-							.start();
-						};
+						
 						bounce(INTERSECTED)
 						
 						}
