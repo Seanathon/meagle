@@ -113,7 +113,9 @@
 		<script src="js/ColladaLoader.js"></script>
 		<script src="js/OrbitControls.js"></script>
 		<script src="js/Projector.js"></script>
+		<script src="js/SkyShader.js"></script>
 		<script src="js/dat.gui.min.js"></script>
+
 		<script>
 			$('button').on('click', function() {
 				console.log('open');
@@ -131,6 +133,8 @@
 			var raycaster, mouse, INTERSECTED;
 			var setMaterial;
 
+			var sky, sunSphere;
+
 			var colorHash = {};
 			
 			var gui;
@@ -140,12 +144,12 @@
 			scene = new THREE.Scene();
 			scene.fog = new THREE.FogExp2( 0x333333, 0.0009);
 
-			camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight, 0.1, 20000);
+			camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight, 0.1, 2000000);
 
 			renderer = new THREE.WebGLRenderer({
 				antialias: true
 			});
-			renderer.setClearColor(0xFFFFFF);
+			//renderer.setClearColor(0xFFFFFF);
 			renderer.setPixelRatio(window.devicePixelRatio);
 			renderer.setSize(window.innerWidth, window.innerHeight);
 			renderer.shadowMap.enabled = true;
@@ -162,9 +166,9 @@
 			floor.rotation.x = Math.PI / 2;
 			//scene.add(floor);
 
-			///ambientLight = new THREE.AmbientLight( 0xFFFFFF, 0.75 );
+			ambientLight = new THREE.AmbientLight( 0xFFFFFF, 0.75 );
 			
-			
+			scene.add( ambientLight)
 		
 			
 		var spotLight = new THREE.SpotLight( 0xffffff );
@@ -181,23 +185,83 @@ spotLight.penumbra = 0.2;
 			
 				
 				
-				var helper = new THREE.CameraHelper( spotLight.shadow.camera );
-scene.add( helper );
-
-/*
-spotLight.shadow.mapSize.width = 1024;
-spotLight.shadow.mapSize.height = 1024;
-*/
-
-/*
-spotLight.shadow.camera.near = 500;
-spotLight.shadow.camera.far = 4000;
-spotLight.shadow.camera.fov = 30;
-*/
+// 				var helper = new THREE.CameraHelper( spotLight.shadow.camera );
+// scene.add( helper );
 
 scene.add( spotLight );	
 			
 		
+
+function initSky() {
+
+				// Add Sky Mesh
+				sky = new THREE.Sky();
+				scene.add( sky.mesh );
+
+				// Add Sun Helper
+				sunSphere = new THREE.Mesh(
+					new THREE.SphereBufferGeometry( 20000, 16, 8 ),
+					new THREE.MeshBasicMaterial( { color: 0xffffff } )
+				);
+				sunSphere.position.y = - 700000;
+				sunSphere.visible = false;
+				scene.add( sunSphere );
+
+				/// GUI
+
+				var effectController  = {
+					turbidity: 10,
+					rayleigh: 2,
+					mieCoefficient: 0.005,
+					mieDirectionalG: 0.8,
+					luminance: 1,
+					inclination: 0.49, // elevation / inclination
+					azimuth: 0.25, // Facing front,
+					sun: ! true
+				};
+
+				var distance = 400000;
+
+				function guiChanged() {
+
+					var uniforms = sky.uniforms;
+					uniforms.turbidity.value = effectController.turbidity;
+					uniforms.rayleigh.value = effectController.rayleigh;
+					uniforms.luminance.value = effectController.luminance;
+					uniforms.mieCoefficient.value = effectController.mieCoefficient;
+					uniforms.mieDirectionalG.value = effectController.mieDirectionalG;
+
+					var theta = Math.PI * ( effectController.inclination - 0.5 );
+					var phi = 2 * Math.PI * ( effectController.azimuth - 0.5 );
+
+					sunSphere.position.x = distance * Math.cos( phi );
+					sunSphere.position.y = distance * Math.sin( phi ) * Math.sin( theta );
+					sunSphere.position.z = distance * Math.sin( phi ) * Math.cos( theta );
+
+					sunSphere.visible = effectController.sun;
+
+					sky.uniforms.sunPosition.value.copy( sunSphere.position );
+
+					renderer.render( scene, camera );
+
+				}
+
+				var gui = new dat.GUI();
+
+				gui.add( effectController, "turbidity", 1.0, 20.0, 0.1 ).onChange( guiChanged );
+				gui.add( effectController, "rayleigh", 0.0, 4, 0.001 ).onChange( guiChanged );
+				gui.add( effectController, "mieCoefficient", 0.0, 0.1, 0.001 ).onChange( guiChanged );
+				gui.add( effectController, "mieDirectionalG", 0.0, 1, 0.001 ).onChange( guiChanged );
+				gui.add( effectController, "luminance", 0.0, 2 ).onChange( guiChanged );
+				gui.add( effectController, "inclination", 0, 1, 0.0001 ).onChange( guiChanged );
+				gui.add( effectController, "azimuth", 0, 1, 0.0001 ).onChange( guiChanged );
+				gui.add( effectController, "sun" ).onChange( guiChanged );
+
+				guiChanged();
+
+			}
+
+
 			
 			//scene.add( ambientLight );
 
@@ -211,30 +275,30 @@ scene.add( spotLight );
 				camera.updateProjectionMatrix();
 			})
 
-			camera.position.z = 120;
+			camera.position.z = 500000;
 			camera.position.x = 0;
 			camera.position.y = 20;
 			camera.lookAt(new THREE.Vector3())
 			controls = new THREE.OrbitControls(camera,renderer.domElement);
 			
-			/*
-new TWEEN.Tween( camera.position ).to( {
-						x: 0,
-						y: 20,
-						z: 120}, 4000 )
-					.easing( TWEEN.Easing.Quadratic.Out).start();
-*/
+			
+// new TWEEN.Tween( camera.position ).to( {
+// 						x: 0,
+// 						y: 20,
+// 						z: 120}, 10000 )
+// 					.easing( TWEEN.Easing.Quadratic.Out).start();
+
 
 			
-			/*
-new TWEEN.Tween( controls.target ).to( {
-				x: 0,
-				y: 100,
-				z: 0}, 4000 )
-				.easing( TWEEN.Easing.Quadratic.Out).start();
-*/
-
 			
+// new TWEEN.Tween( controls.target ).to( {
+// 				x: 0,
+// 				y: 100,
+// 				z: 0}, 4000 )
+// 				.easing( TWEEN.Easing.Quadratic.Out).start();
+
+
+			initSky();
 			
 
 			raycaster = new THREE.Raycaster();
