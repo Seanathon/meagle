@@ -181,7 +181,7 @@ spotLight.penumbra = 0.2;
 				spotLight.shadow.mapSize.width = 1024;  // default
 				spotLight.shadow.mapSize.height = 1024; // default
 				spotLight.shadow.camera.near = 0.5;       // default
-				spotLight.shadow.camera.far = 300;      // default
+				spotLight.shadow.camera.far = 500;      // default
 			
 				
 				
@@ -454,13 +454,13 @@ loader.load(
 					decay: spotLight.decay
 				}
 				
-				gui.add(params, 'light_x').min(-256).max(256).step(1).onChange( function ( val ) {
+				gui.add(params, 'light_x').min(-256.0).max(256.0).step(0.1).onChange( function ( val ) {
 					spotLight.position.x = val
 				});
-				gui.add(params, 'light_y').min(-256).max(256).step(1).onChange( function ( val ) {
+				gui.add(params, 'light_y').min(-256.0).max(256.0).step(0.1).onChange( function ( val ) {
 					spotLight.position.y = val
 				});
-				gui.add(params, 'light_z').min(-256).max(256).step(1).onChange( function ( val ) {
+				gui.add(params, 'light_z').min(-256.0).max(256.0).step(0.1).onChange( function ( val ) {
 					spotLight.position.z = val
 				});
 
@@ -471,7 +471,7 @@ loader.load(
 
 				} );
 
-				gui.add( params, 'intensity', 0, 2 ).onChange( function ( val ) {
+				gui.add( params, 'intensity').min(0.0).max(2.0).step(0.01).onChange( function ( val ) {
 
 					spotLight.intensity = val;
 					render();
@@ -479,28 +479,28 @@ loader.load(
 				} );
 
 
-				gui.add( params, 'distance', 50, 300 ).onChange( function ( val ) {
+				gui.add( params, 'distance').min(50.0).max(300.0).step(0.1).onChange( function ( val ) {
 
 					spotLight.distance = val;
 					render();
 
 				} );
 
-				gui.add( params, 'angle', 0, Math.PI / 3 ).onChange( function ( val ) {
+				gui.add( params, 'angle').min(0.0).max(Math.PI / 3.0).step(0.01).onChange( function ( val ) {
 
 					spotLight.angle = val;
 					render();
 
 				} );
 
-				gui.add( params, 'penumbra', 0, 1 ).onChange( function ( val ) {
+				gui.add( params, 'penumbra').min(0.0).max(1.0).step(0.01).onChange( function ( val ) {
 
 					spotLight.penumbra = val;
 					render();
 
 				} );
 
-				gui.add( params, 'decay', 1, 2 ).onChange( function ( val ) {
+				gui.add( params, 'decay').min(1.0).max(2.0).step(0.01).onChange( function ( val ) {
 
 					spotLight.decay = val;
 					render();
