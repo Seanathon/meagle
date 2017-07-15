@@ -147,13 +147,14 @@
 			camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight, 0.1, 2000000);
 
 			renderer = new THREE.WebGLRenderer({
-				antialias: true
+				antialias: false
 			});
 			//renderer.setClearColor(0xFFFFFF);
-			renderer.setPixelRatio(window.devicePixelRatio);
+			renderer.setPixelRatio(window.devicePixelRatio*.75);
 			renderer.setSize(window.innerWidth, window.innerHeight);
 			renderer.shadowMap.enabled = true;
-			renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+			// renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+			renderer.shadowMap.type = THREE.PCFShadowMap;
 			
 			
 			floorMat = new THREE.MeshBasicMaterial({
@@ -178,8 +179,8 @@ spotLight.penumbra = 0.2;
 
 	spotLight.castShadow = true;
 
-				spotLight.shadow.mapSize.width = 1024;  // default
-				spotLight.shadow.mapSize.height = 1024; // default
+				spotLight.shadow.mapSize.width = 512;  // default
+				spotLight.shadow.mapSize.height = 512; // default
 				spotLight.shadow.camera.near = 0.5;       // default
 				spotLight.shadow.camera.far = 500;      // default
 			
