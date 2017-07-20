@@ -360,12 +360,10 @@ loader.load(
 	function ( collada ) {
 		dae = collada.scene
 		dae.traverse( function(child) {
-		
-			console.log(child.children)
 			child.castShadow = true;
 			child.receiveShadow = true;
 			if(child.name.indexOf('s_') == 0){
-				child.userData = { hovered: false };
+				child.userData = { hovered: false, elevated: false, baseY: child.position.y };
 				intersectable.push(child)
 			}
 			if( child.material ) {
@@ -388,11 +386,22 @@ loader.load(
 			
 			
 			var bounce = function(obj) {
-							obj.parent.userData.hovered = true
-							new TWEEN.Tween( obj.position ).to( { y: [500,0] }, 400 )
+							//obj.parent.userData.hovered = true
+							new TWEEN.Tween( obj.position ).to( { y: [500] }, 400 )
 							.easing( TWEEN.Easing.Quadratic.Out)
 							.onComplete(function() {
-								obj.parent.userData.hovered = false
+								obj.userData.elevated = true
+							})
+							.start();
+						};
+
+			var bounceDown = function(obj) {
+						 console.log(obj)
+							obj.userData.elevated = false
+							new TWEEN.Tween( obj.position ).to( { y: [obj.userData.baseY] }, 400 )
+							.easing( TWEEN.Easing.Quadratic.Out)
+							.onComplete(function() {
+								 
 							})
 							.start();
 						};
@@ -406,6 +415,10 @@ loader.load(
 				// calculate objects intersecting the picking ray
 				var intersects = raycaster.intersectObjects( intersectable, true );
 				
+				for (i in intersectable) {
+					var obj = intersectable[i]
+					obj.userData.hovered = false
+				}
 				
 				if ( intersects.length > 0 ) {
 				
@@ -413,17 +426,21 @@ loader.load(
 					if ( INTERSECTED != intersects[ 0 ].object ) {
 						//if (INTERSECTED) setMaterial( INTERSECTED, INTERSECTED.currentHex )
 						INTERSECTED = intersects[ 0 ].object;
- 						if (INTERSECTED.parent.userData.hovered == false) {
-						
-						
-						bounce(INTERSECTED)
-						
-						}
+ 						INTERSECTED.parent.userData.hovered = true;
 					
 					}
 				} else {
-				//	if (INTERSECTED) setMaterial( INTERSECTED, null )
 					INTERSECTED = null;
+				}
+
+				for (i in intersectable) {
+					var obj = intersectable[i]
+					if (obj.userData.hovered == true) {
+						bounce(obj)
+					}
+					else if (obj.userData.hovered == false && obj.userData.elevated == true) { 
+						bounceDown(obj)
+					}
 				}
 
 				renderer.render(scene, camera);
