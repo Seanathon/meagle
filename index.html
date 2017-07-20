@@ -385,9 +385,9 @@ loader.load(
 			}
 			
 			
-			var bounce = function(obj) {
+			var bounce = function(obj, point) {
 							//obj.parent.userData.hovered = true
-							new TWEEN.Tween( obj.position ).to( { y: [500] }, 400 )
+							new TWEEN.Tween( obj.position ).to( { y: [point] }, 400 )
 							.easing( TWEEN.Easing.Quadratic.Out)
 							.onComplete(function() {
 								obj.userData.elevated = true
@@ -420,12 +420,15 @@ loader.load(
 					obj.userData.hovered = false
 				}
 				
+				var y = 0;
 				if ( intersects.length > 0 ) {
-				
+
+				console.log(intersects[0])
 					
 					if ( INTERSECTED != intersects[ 0 ].object ) {
 						//if (INTERSECTED) setMaterial( INTERSECTED, INTERSECTED.currentHex )
 						INTERSECTED = intersects[ 0 ].object;
+						y = intersects[ 0 ].point.y
  						INTERSECTED.parent.userData.hovered = true;
 					
 					}
@@ -436,7 +439,7 @@ loader.load(
 				for (i in intersectable) {
 					var obj = intersectable[i]
 					if (obj.userData.hovered == true) {
-						bounce(obj)
+						bounce(obj, y)
 					}
 					else if (obj.userData.hovered == false && obj.userData.elevated == true) { 
 						bounceDown(obj)
