@@ -80,11 +80,51 @@
 			button:focus {
 				outline: none;
 			}
+			#loader {
+				background-color: #fff;
+				width: 100vw;
+				height: 100vh;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			#indicator {
+				width: 100%;
+				font-size: 3rem;
+				text-align: center;
+			}
+			.loadingbar {
+				height: 100vh;
+				width: 100vw;
+				z-index: -1;
+				background-color: #000;
+				top: 0;
+				left: 0;
+				position: absolute;
+			}
+			#helper_text {
+				display: none;
+				position: absolute;
+				width: 100vw;
+				height: 100vh;
+				align-items: center;
+				justify-content: center;
+				pointer-events: none;
+			}
+			#helper_text span {
+				font-size: 18em;
+				color: #fff;
+				letter-spacing: 2px;
+				text-shadow: 10px 10px rgb(0,0,0);
+			}
+			.display--flex {
+				display: flex!important;
+			}
 		</style>
 				<link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/terminal-grotesque" type="text/css"/>
 	</head>
 	<body>
-		<nav>
+<!-- 		<nav>
 			<button>Open Mike Eagle</button>
 
 			<ul class="menu">
@@ -101,7 +141,17 @@
 					Blog
 				</a></li>
 			</ul>
-		</nav>
+		</nav> -->
+		<!-- <div id="loader">
+			<div id="indicator">
+				<img src="img/200w_d.gif" alt="Mike Eagle" style="display: block; text-align: center; width: 200px; margin: auto;">
+				<span id="percent">0%</span>
+			</div>
+		</div> -->
+		<div id="helper_text">
+			<span>SHOP</span>
+		</div>
+
 		<script
 		  src="https://code.jquery.com/jquery-3.2.0.min.js"
 		  integrity="sha256-JAW99MJVpJBGcbzEuXk4Az05s/XyDdBomFqNlM3ic+I="
@@ -140,7 +190,6 @@
 			var gui;
 			
 			
-			
 			scene = new THREE.Scene();
 			scene.fog = new THREE.FogExp2( 0x333333, 0.0009);
 
@@ -154,7 +203,7 @@
 			renderer.setSize(window.innerWidth, window.innerHeight);
 			renderer.shadowMap.enabled = true;
 			// renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-			renderer.shadowMap.type = THREE.PCFShadowMap;
+			renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 			
 			
 			floorMat = new THREE.MeshBasicMaterial({
@@ -172,28 +221,68 @@
 			scene.add( ambientLight)
 		
 			
-		var spotLight = new THREE.SpotLight( 0xffffff );
+			var spotLight = new THREE.SpotLight( '0xfwc97e' );
 
-spotLight.position.y = 80;
-spotLight.penumbra = 0.2;
+			spotLight.position.x = 26;
+			spotLight.position.y = 256;
+			spotLight.position.z = 109;
+			spotLight.intensity = 0.7;
+			spotLight.distance = 0;
+			spotLight.angle = 1;
+			spotLight.penumbra = 0.36;
+			spotLight.decay = 1;
 
-	spotLight.castShadow = true;
+			spotLight.castShadow = true;
 
-				spotLight.shadow.mapSize.width = 512;  // default
-				spotLight.shadow.mapSize.height = 512; // default
-				spotLight.shadow.camera.near = 0.5;       // default
-				spotLight.shadow.camera.far = 500;      // default
+			spotLight.shadow.mapSize.width = 1024;  // default
+			spotLight.shadow.mapSize.height = 1024; // default
+			spotLight.shadow.camera.near = 0.5;       // default
+			spotLight.shadow.camera.far = 500;      // default
 			
 				
 				
-// 				var helper = new THREE.CameraHelper( spotLight.shadow.camera );
-// scene.add( helper );
+			// 				var helper = new THREE.CameraHelper( spotLight.shadow.camera );
+			// scene.add( helper );
 
-scene.add( spotLight );	
-			
-		
+			scene.add( spotLight );	
+						
+			var loader = new THREE.ColladaLoader();
+			var intersectable = [];
 
-function initSky() {
+			loader.load(
+				// resource URL
+				'models/LOWPOLYLAND.dae',
+				// Function when resource is loaded
+				function ( collada ) {
+					dae = collada.scene
+					dae.traverse( function(child) {
+						child.castShadow = true;
+						child.receiveShadow = true;
+						if(child.name.indexOf('s_') == 0){
+							child.userData = { 
+								hovered: false, 
+								elevated: false, 
+								baseY: child.position.y 
+							};
+							intersectable.push(child)
+						}
+						if( child.material ) {
+				      	  child.material.side = THREE.DoubleSide;
+						}
+					});
+					scene.add( dae );
+				},
+				// Function called when download progresses
+				function ( xhr ) {
+					var p = xhr.loaded / xhr.total * 100;
+					document.getElementById("percent").innerHTML = Math.round(p) + '%';
+					if (p > 50) {
+						
+					}
+				}
+			);
+
+			function initSky() {
 
 				// Add Sky Mesh
 				sky = new THREE.Sky();
@@ -211,13 +300,13 @@ function initSky() {
 				/// GUI
 
 				var effectController  = {
-					turbidity: 10,
-					rayleigh: 2,
+					turbidity: 10.4,
+					rayleigh: 1.899,
 					mieCoefficient: 0.005,
-					mieDirectionalG: 0.8,
-					luminance: 1,
-					inclination: 0.49, // elevation / inclination
-					azimuth: 0.25, // Facing front,
+					mieDirectionalG: 0.323,
+					luminance: 0.2,
+					inclination: 0.42472, // elevation / inclination
+					azimuth: 0.4657, // Facing front,
 					sun: ! true
 				};
 
@@ -247,22 +336,8 @@ function initSky() {
 
 				}
 
-				var gui = new dat.GUI();
-
-				gui.add( effectController, "turbidity", 1.0, 20.0, 0.1 ).onChange( guiChanged );
-				gui.add( effectController, "rayleigh", 0.0, 4, 0.001 ).onChange( guiChanged );
-				gui.add( effectController, "mieCoefficient", 0.0, 0.1, 0.001 ).onChange( guiChanged );
-				gui.add( effectController, "mieDirectionalG", 0.0, 1, 0.001 ).onChange( guiChanged );
-				gui.add( effectController, "luminance", 0.0, 2 ).onChange( guiChanged );
-				gui.add( effectController, "inclination", 0, 1, 0.0001 ).onChange( guiChanged );
-				gui.add( effectController, "azimuth", 0, 1, 0.0001 ).onChange( guiChanged );
-				gui.add( effectController, "sun" ).onChange( guiChanged );
-
 				guiChanged();
-
 			}
-
-
 			
 			//scene.add( ambientLight );
 
@@ -283,20 +358,21 @@ function initSky() {
 			controls = new THREE.OrbitControls(camera,renderer.domElement);
 			
 			
-// new TWEEN.Tween( camera.position ).to( {
-// 						x: 0,
-// 						y: 20,
-// 						z: 120}, 4000 )
-// 					.easing( TWEEN.Easing.Quadratic.Out).start();
+			// new TWEEN.Tween( camera.position ).to( {
+			// 						x: 0,
+			// 						y: 20,
+			// 						z: 120}, 4000 )
+			// 					.easing( TWEEN.Easing.Quadratic.Out).start();
 
 
-			
-			
-// new TWEEN.Tween( controls.target ).to( {
-// 				x: 0,
-// 				y: 100,
-// 				z: 0}, 4000 )
-// 				.easing( TWEEN.Easing.Quadratic.Out).start();
+						
+						
+			// new TWEEN.Tween( controls.target ).to( {
+			// 				x: 0,
+			// 				y: 100,
+			// 				z: 0}, 4000 )
+			// 				.easing( TWEEN.Easing.Quadratic.Out).start();
+
 
 
 			initSky();
@@ -350,42 +426,28 @@ function initSky() {
 			
 			
 			
-			var loader = new THREE.ColladaLoader();
-			var intersectable = [];
-
-loader.load(
-	// resource URL
-	'models/LOWPOLYLAND.dae',
-	// Function when resource is loaded
-	function ( collada ) {
-		dae = collada.scene
-		dae.traverse( function(child) {
-			child.castShadow = true;
-			child.receiveShadow = true;
-			if(child.name.indexOf('s_') == 0){
-				child.userData = { hovered: false, elevated: false, baseY: child.position.y };
-				intersectable.push(child)
-			}
-			if( child.material ) {
-	      	  child.material.side = THREE.DoubleSide;
-			}
-		});
-		scene.add( dae );
-	},
-	// Function called when download progresses
-	function ( xhr ) {
-		console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
-	}
-);
-
 
 
 			update = function() {
-
 			}
 			
 			
 			var bounce = function(obj, point) {
+					console.log(obj.name);
+						document.getElementById('helper_text').className = "display--flex";
+							if ( obj.name === 's_SPOTIFY' ) {
+	 							document.getElementById('helper_text').innerHTML = "<span>LISTEN</span>";
+	 						} else if ( obj.name === 's_CONTACT' ) {
+	 							document.getElementById('helper_text').innerHTML = "<span>CONTACT</span>";
+	 						} else if ( obj.name === 's_SOCIAL_MEDIA' ) {
+	 							document.getElementById('helper_text').innerHTML = "<span>BLOG</span>";
+	 						} else if ( obj.name === 's_YOUTUBE' ) {
+	 							document.getElementById('helper_text').innerHTML = "<span>WATCH</span>";
+	 						} else if ( obj.name === 's_YOUTUBE_LINK' ) {
+	 							document.getElementById('helper_text').innerHTML = '<span><img src="img/wrestling-mask.png"></span>';
+	 						} else if ( obj.name === 's_STORE' ) {
+	 							document.getElementById('helper_text').innerHTML = "<span>SHOP</span>";
+	 						} 
 							//obj.parent.userData.hovered = true
 							new TWEEN.Tween( obj.position ).to( { y: [point] }, 400 )
 							.easing( TWEEN.Easing.Quadratic.Out)
@@ -397,6 +459,7 @@ loader.load(
 
 			var bounceDown = function(obj) {
 						 console.log(obj)
+						 	document.getElementById('helper_text').className = "";
 							obj.userData.elevated = false
 							new TWEEN.Tween( obj.position ).to( { y: [obj.userData.baseY] }, 1000 )
 							.easing( TWEEN.Easing.Quadratic.Out)
@@ -423,14 +486,15 @@ loader.load(
 				var y = 0;
 				if ( intersects.length > 0 ) {
 
-				console.log(intersects[0])
+				// console.log(intersects[0])
 					
 					if ( INTERSECTED != intersects[ 0 ].object ) {
 						//if (INTERSECTED) setMaterial( INTERSECTED, INTERSECTED.currentHex )
 						INTERSECTED = intersects[ 0 ].object;
 						y = intersects[ 0 ].point.y
  						INTERSECTED.parent.userData.hovered = true;
-					
+ 						
+						
 					}
 				} else {
 					INTERSECTED = null;
@@ -465,80 +529,5 @@ loader.load(
 			window.addEventListener( 'mousemove', onMouseMove, false );
 			GameLoop();
 			
-			
-			function buildGui() {
-
-				gui = new dat.GUI();
-
-				var params = {
-					light_x : 0,
-					light_y : 100,
-					light_z : 0,
-					'light color': spotLight.color.getHex(),
-					intensity: spotLight.intensity,
-					distance: spotLight.distance,
-					angle: spotLight.angle,
-					penumbra: spotLight.penumbra,
-					decay: spotLight.decay
-				}
-				
-				gui.add(params, 'light_x').min(-256.0).max(256.0).step(0.1).onChange( function ( val ) {
-					spotLight.position.x = val
-				});
-				gui.add(params, 'light_y').min(-256.0).max(256.0).step(0.1).onChange( function ( val ) {
-					spotLight.position.y = val
-				});
-				gui.add(params, 'light_z').min(-256.0).max(256.0).step(0.1).onChange( function ( val ) {
-					spotLight.position.z = val
-				});
-
-				gui.addColor( params, 'light color' ).onChange( function ( val ) {
-
-					spotLight.color.setHex( val );
-					render();
-
-				} );
-
-				gui.add( params, 'intensity').min(0.0).max(2.0).step(0.01).onChange( function ( val ) {
-
-					spotLight.intensity = val;
-					render();
-
-				} );
-
-
-				gui.add( params, 'distance').min(50.0).max(300.0).step(0.1).onChange( function ( val ) {
-
-					spotLight.distance = val;
-					render();
-
-				} );
-
-				gui.add( params, 'angle').min(0.0).max(Math.PI / 3.0).step(0.01).onChange( function ( val ) {
-
-					spotLight.angle = val;
-					render();
-
-				} );
-
-				gui.add( params, 'penumbra').min(0.0).max(1.0).step(0.01).onChange( function ( val ) {
-
-					spotLight.penumbra = val;
-					render();
-
-				} );
-
-				gui.add( params, 'decay').min(1.0).max(2.0).step(0.01).onChange( function ( val ) {
-
-					spotLight.decay = val;
-					render();
-
-				} );
-
-				gui.open();
-
-			}
-			
-			buildGui();
 
 		</script>

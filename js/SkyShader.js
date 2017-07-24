@@ -224,4 +224,3 @@ THREE.Sky.SkyShader = {
 	].join( '\n' )
 
 };
-
