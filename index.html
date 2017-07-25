@@ -431,24 +431,26 @@
 			update = function() {
 			}
 			
+
+			var textElement = document.getElementById('helper_text')
 			
 			var bounce = function(obj, point) {
-						document.getElementById('helper_text').className = "display--flex";
+						textElement.className = "display--flex";
 						document.body.style.cursor = "pointer";
 							if ( obj.name === 's_SPOTIFY' ) {
-	 							document.getElementById('helper_text').innerHTML = "<span>LISTEN</span>";
+	 							textElement.innerHTML = "<span>LISTEN</span>";
 	 						} else if ( obj.name === 's_CONTACT' ) {
-	 							document.getElementById('helper_text').innerHTML = "<span>CONTACT</span>";
+	 							textElement.innerHTML = "<span>CONTACT</span>";
 	 						} else if ( obj.name === 's_SOCIAL_MEDIA' ) {
-	 							document.getElementById('helper_text').innerHTML = "<span>BLOG</span>";
+	 							textElement.innerHTML = "<span>BLOG</span>";
 	 						} else if ( obj.name === 's_YOUTUBE' ) {
-	 							document.getElementById('helper_text').innerHTML = "<span>WATCH</span>";
+	 							textElement.innerHTML = "<span>WATCH</span>";
 	 						} else if ( obj.name === 's_YOUTUBE_LINK' ) {
-	 							document.getElementById('helper_text').innerHTML = '<span><img src="img/wrestling-mask.png"></span>';
+	 							textElement.innerHTML = '<span><img src="img/wrestling-mask.png"></span>';
 	 						} else if ( obj.name === 's_STORE' ) {
-	 							document.getElementById('helper_text').innerHTML = "<span>SHOP</span>";
+	 							textElement.innerHTML = "<span>SHOP</span>";
 	 						} else if ( obj.name === 'S_MERRY' ) {
-	 							document.getElementById('helper_text').innerHTML = " ";
+	 							textElement.innerHTML = " ";
 	 							new TWEEN.Tween( obj.rotation ).to( { y: [point] }, 100 );
 	 						}
 							//obj.parent.userData.hovered = true
@@ -462,7 +464,7 @@
 
 			var bounceDown = function(obj) {
 						document.body.style.cursor = "default";
-						 	document.getElementById('helper_text').className = "";
+						 	textElement.className = "";
 							obj.userData.elevated = false
 							new TWEEN.Tween( obj.position ).to( { y: [obj.userData.baseY] }, 1000 )
 							.easing( TWEEN.Easing.Quadratic.Out)
