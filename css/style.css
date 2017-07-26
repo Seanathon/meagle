@@ -638,7 +638,10 @@ h2 {
 		pointer-events: auto;
 	}
 	#about #head {
-		display: none;
+		display: block;
+		height: 300px;
+		width: 100%;
+		padding-bottom: 0;
 	}
 	#about hr {
 		display: none;

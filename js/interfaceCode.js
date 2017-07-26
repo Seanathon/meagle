@@ -1,7 +1,7 @@
 // Listen for clicks outside of opened <div> elements 
 $(document).ready(function(){
 	$(document).click(function(e){
-		if ($(e.target).is('#contact,#contact *, #navigation, #navigation *, #about.visible, #about.visible *')) {
+		if ($(e.target).is('#contact,#contact *, #navigation, #navigation *, #about.visible, #about.visible *') || globalContact ) {
 			return;
 		}
 		else {

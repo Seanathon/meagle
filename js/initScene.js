@@ -1,4 +1,4 @@
-(function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='http://rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()
+// (function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='http://rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()
 
 var camera, scene, renderer;
 var mtlLoader, objects, ambientLight, controls;
@@ -7,13 +7,9 @@ var onProgress, onError;
 var update, render, GameLoop;
 var raycaster, mouse, INTERSECTED;
 var setMaterial;
-
 var sky, sunSphere;
-
 var colorHash = {};
-
 var gui;
-
 
 scene = new THREE.Scene();
 scene.fog = new THREE.FogExp2( 0x333333, 0.0009);
@@ -28,23 +24,10 @@ renderer = new THREE.WebGLRenderer({
 renderer.setPixelRatio(window.devicePixelRatio*.75);
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.shadowMap.enabled = true;
-// renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
-
-floorMat = new THREE.MeshBasicMaterial({
-	color: 0xFFFFFF,
-	side: THREE.DoubleSide
-});
-floorGeo = new THREE.PlaneGeometry(2000,2000,10,10);
-floor = new THREE.Mesh(floorGeo, floorMat);
-floor.position.y = -0.5;
-floor.rotation.x = Math.PI / 2;
-//scene.add(floor);
-
 ambientLight = new THREE.AmbientLight( 0xFFFFFF, 0.75 );
-
-scene.add( ambientLight)
+scene.add( ambientLight);
 
 
 var spotLight = new THREE.SpotLight( '0xfwc97e' );
@@ -96,9 +79,9 @@ loader.load(
 				};
 				intersectable.push(child)
 			}
-			if( child.material ) {
-	      	  child.material.side = THREE.DoubleSide;
-			}
+			// if( child.material ) {
+	  //     	  child.material.side = THREE.DoubleSide;
+			// }
 		});
 		scene.add( dae );
 	},
@@ -183,30 +166,12 @@ window.addEventListener('resize', function() {
 
 camera.position.z = 360;
 camera.position.x = 0;
-camera.position.y = 40;
+camera.position.y = 100;
 camera.lookAt(new THREE.Vector3())
 controls = new THREE.OrbitControls(camera,renderer.domElement);
 
 
-// new TWEEN.Tween( camera.position ).to( {
-// 						x: 0,
-// 						y: 20,
-// 						z: 120}, 4000 )
-// 					.easing( TWEEN.Easing.Quadratic.Out).start();
-
-
-			
-			
-// new TWEEN.Tween( controls.target ).to( {
-// 				x: 0,
-// 				y: 100,
-// 				z: 0}, 4000 )
-// 				.easing( TWEEN.Easing.Quadratic.Out).start();
-
-
-
 initSky();
-
 
 raycaster = new THREE.Raycaster();
 mouse = new THREE.Vector2();
@@ -258,7 +223,8 @@ function setMaterial(object, hex) {
 update = function() {
 }
 
-var textElement = document.getElementById('helper_text')
+var textElement = document.getElementById('helper_text');
+var globalContact = false;
 
 var bounce = function(obj, point) {
 	textElement.className = "display--flex";
@@ -268,7 +234,8 @@ var bounce = function(obj, point) {
 		obj.url = "http://openmikeeagle360.bandcamp.com/";
 	} else if ( obj.name === 's_CONTACT' ) {
 		textElement.innerHTML = "<span>CONTACT</span>";
-		obj.url = "";
+		obj.url = "contact";
+		globalContact = true;
 	} else if ( obj.name === 's_SOCIAL_MEDIA' ) {
 		textElement.innerHTML = "<span>BLOG</span>";
 		obj.url = "http://mikeeaglestinks.tumblr.com/";
@@ -277,10 +244,10 @@ var bounce = function(obj, point) {
 		obj.url = "http://youtube.com/channel/UCDvaK0SNn3RbSUpLnZ-fuYg";
 	} else if ( obj.name === 's_YOUTUBE_LINK' ) {
 		textElement.innerHTML = '<span><img src="img/wrestling-mask.png"></span>';
-		obj.url = "";
+		obj.url = "https://www.youtube.com/watch?v=bqvpKwsEjjo";
 	} else if ( obj.name === 's_STORE' ) {
 		textElement.innerHTML = "<span>SHOP</span>";
-		obj.url = "";
+		obj.url = "shop";
 	} 
 	console.log(obj.url);
 	// this.addEventListener("click", function() {
@@ -296,7 +263,7 @@ var bounce = function(obj, point) {
 };
 
 var bounceDown = function(obj) {
-	buildingURL = "";
+	globalContact = false;
 	document.body.style.cursor = "default";
  	textElement.className = "";
 	obj.userData.elevated = false
@@ -332,14 +299,23 @@ render = function() {
 			var objI = INTERSECTED.parent;
 			y = intersects[ 0 ].point.y
 			objI.userData.hovered = true;
-			console.log('hovering');
-			console.log(objI.url);
+			// console.log('hovering');
+			// console.log(objI.url);
 			$('body').on("click", function(){
-				window.open(objI.url);
+				if ( objI.url == "contact" ) {
+					$("#navigation").toggleClass('visible'); 
+					$("#contact").addClass('visible');
+				} else if ( objI.url == "shop" ) {
+					$("#coming").addClass('visible');
+					window.setTimeout(function(){
+						$("#coming").removeClass('visible');
+					}, 3000);
+				} else {
+					window.open(objI.url);
+				}
 			});
 		}
 		
-
 	} else {
 
 		INTERSECTED = null;
@@ -350,6 +326,7 @@ render = function() {
 			}
 		}
 		$('body').unbind("click");
+		globalContact == false;
 
 	}
 
@@ -384,5 +361,8 @@ GameLoop = function() {
 }
 
 window.addEventListener( 'mousemove', onMouseMove, false );
+$('div').on('mouseover', function(e) {
+	console.log('hover');
+	e.stopPropagation();
+})
 GameLoop();
-console.log(buildingURL);
