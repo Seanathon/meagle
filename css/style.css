@@ -176,6 +176,9 @@ h2 {
 	text-transform: uppercase;
 	border-bottom: solid 5px black;
 }
+#about h2 {
+	margin-bottom: -3px;
+}
 #music {
 	z-index: 3;
 	top: 0;
@@ -595,6 +598,12 @@ h2 {
 	#contact {
 		width: 100%;
 	}
+	#about h2 {
+		margin-bottom: 35px;
+	}
+	#music {
+		padding: 0;
+	}
 	#navigation nav {
 		left: 0;
 		top: 50px;
@@ -622,6 +631,9 @@ h2 {
 		display: block;
 		position: relative;
 		padding-bottom: 45px;
+	}
+	#head-container {
+		display: none;
 	}
 	#about {
 		top: 0;

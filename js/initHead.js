@@ -1,13 +1,18 @@
 
 
 	var cameraHead, sceneHead, rendererHead;
-
+	var controls;
+	var windowHalfX, windowHalfY;
 	var mouseXHead = 0, mouseYHead = 0;
 
-	var windowHalfX = $("#head").width() / 2;
-	var windowHalfY = $("#head").height() / 2;
-
-
+	if ($(window).width() <= 900) {
+		windowHalfX = $(window).width() / 2;
+		windowHalfY = $(window).height() / 2;
+	} else {
+		windowHalfX = $("#head").width() / 2;
+		windowHalfY = $("#head").height() / 2;
+	}
+	
 	initHead();
 	animateHead();
 
@@ -15,6 +20,7 @@
 	function initHead() {
 		if ($(window).width() <= 900) {
 			cameraHead = new THREE.PerspectiveCamera( 45, $(window).width() / $(window).height(), 1, 2000 );
+			controls = new THREE.DeviceOrientationControls( cameraHead );
 		} else {
 			cameraHead = new THREE.PerspectiveCamera( 45, $('#head').width() / $('#head').height(), 1, 2000 );
 		}
@@ -42,19 +48,20 @@
 
 
 		};
+		
+		var texture = new THREE.Texture();
+
 		var percentage = document.getElementById("percent");
 		var loadingScreen = document.getElementById("loader");
 		var indicator = document.getElementById("indicator");
-		var texture = new THREE.Texture();
-
 		var onProgress = function ( xhr ) {
 			
 			if ( xhr.lengthComputable ) {
 				var percentComplete = xhr.loaded / xhr.total * 100;
 				var p = Math.round(percentComplete);
-				percentage.innerHTML = p + '%';
-				// console.log( Math.round(percentComplete, 2) + '% downloaded' );
-				
+					if ( $(window).width() <= 900 ) {
+						percentage.innerHTML = p + '%';
+					}
 			}
 		};
 
@@ -83,13 +90,15 @@
 				sceneHead.add( object );
 			}, 
 			function() {
-				percentage.innerHTML = '100%';
-				setTimeout(
-					function() {
-						loadingScreen.style.opacity = '0';
-						loadingScreen.style.visibility = 'hidden';
-					}, 1500
-				);
+				if ( $(window).width() <= 900 ) {
+					percentage.innerHTML = '100%';
+					setTimeout(
+						function() {
+							loadingScreen.style.opacity = '0';
+							loadingScreen.style.visibility = 'hidden';
+						}, 1500
+					);
+				}
 			},
 			onProgress, 
 			onError );
@@ -156,6 +165,8 @@
 	// }
 
 	function onDocumentMouseMoveHead( event ) {
+		// console.log(event.clientX + " window: " + windowHalfX);
+		// console.log(event.clientY + " window: " + windowHalfY);
 
 		mouseXHead = ( event.clientX - windowHalfX ) / 2;
 		mouseYHead = ( event.clientY - windowHalfY ) / 2;
@@ -175,6 +186,9 @@
 
 		cameraHead.position.x += ( - mouseXHead - cameraHead.position.x ) * .05;
 		cameraHead.position.y += ( mouseYHead - cameraHead.position.y ) * .05;
+
+		// cameraHead.position.x += ( mouseXHead - cameraHead.position.x ) * .05;
+		// cameraHead.position.y += ( - mouseYHead - cameraHead.position.y ) * .05;		
 
 		cameraHead.lookAt( sceneHead.position );
 
