@@ -411,20 +411,24 @@ h2 {
 }
 #loader {
 	position: absolute;
-	z-index: 1;
+	top: 0;
+	z-index: 8;
 	background-color: transparent;
 	width: 100vw;
 	height: 100vh;
-	display: flex;
-	align-items: center;
-	justify-content: center;
 }
 #indicator {
-	width: 100%;
+	background-color: #fff;
+	width: 100vw;
+	height: 100vh;
 	font-size: 3rem;
 	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	transition: 20ms ease-in-out;
 }
-.loadingbar {
+/*.loadingbar {
 	height: 100vh;
 	width: 100vw;
 	z-index: -1;
@@ -432,6 +436,9 @@ h2 {
 	top: 0;
 	left: 0;
 	position: absolute;
+}*/
+#percent {
+	padding-right: 5rem;
 }
 #helper_text {
 	display: none;

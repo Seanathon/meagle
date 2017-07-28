@@ -59,7 +59,9 @@ var loader = new THREE.ColladaLoader();
 var intersectable = [];
 var percentage = document.getElementById("percent");
 var loadingScreen = document.getElementById("loader");
+var indicator = document.getElementById("indicator");
 var modelWorker = new Worker('js/modelWorker.js');
+var p;
 loader.load(
 	// resource URL
 	'models/LOWPOLYLAND.dae',
@@ -87,11 +89,10 @@ loader.load(
 	},
 	// Function called when download progresses
 	function ( xhr ) {
-		var p = xhr.loaded / xhr.total * 100;
-		percentage.innerHTML = Math.round(p) + '%';
-		if (p > 50) {
-			
-		}
+		p = Math.round(xhr.loaded / xhr.total * 100);
+		console.log(p);
+		percentage.innerHTML = p + '%';
+		indicator.style.transform = "translateX(-" + p + "%)";
 	}
 );
 
