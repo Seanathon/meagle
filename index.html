@@ -32,6 +32,8 @@
 		</div>
 		<!-- 3D City Model -->
 		<canvas id="city"></canvas>
+		<!-- Mobile Head Canvas -->
+		<canvas id="headMobile"></canvas>
 		<!-- Content Overlay -->
 		<h1>Open Mike Eagle</h1>
 		<!-- Main Navigation -->
@@ -102,15 +104,16 @@
 		</div>
 		<!-- About Panel -->
 		<div id="about">
-			<h2>About</h2>
-			
-				<canvas id="head"></canvas>
+			<h2 style="margin-bottom: -3px;">About</h2>
+				<div id="head-container">
+					<canvas id="head"></canvas>
+				</div>
 				<!-- Replace image with canvas element using the 3D model of Mike's head. Use the #head ID on the canvas element. -->
 			
 			<!-- <img src="//placehold.it/310x430/ffffff/000000&text=3D+Model" id="head" alt="Open Mike Eagle"> -->
 			<hr>
 			<div id="text">
-				<p>A member of California's <a href="//allmusic.com/artist/project-blowed-mn0000364679" target="_blank">Project Blowed</a> collective with a whip-smart sense of humor, rapper <a href="//allmusic.com/artist/open-mike-eagle-mn0002113916" target="_blank">Open Mike Eagle</a> was born Michael Eagle II in Chicago. It was at the Southern Illinois University Carbondale that the aspiring MC became an RA, and after he met <a href="//allmusic.com/artist/hannibal-buress-mn0002463646" target="_blank">Hannibal Buress</a> the resident advisor and student became fast friends. Grad school brought him to the West Coast, where he joined the <a href="//allmusic.com/artist/project-blowed-mn0000364679" target="_blank">Project Blowed</a> collective along with the group <a href="//allmusic.com/artist/thirsty-fish-mn0002003393" target="_blank">Thirsty Fish</a>.</p>
+				<!-- <p>A member of California's <a href="//allmusic.com/artist/project-blowed-mn0000364679" target="_blank">Project Blowed</a> collective with a whip-smart sense of humor, rapper <a href="//allmusic.com/artist/open-mike-eagle-mn0002113916" target="_blank">Open Mike Eagle</a> was born Michael Eagle II in Chicago. It was at the Southern Illinois University Carbondale that the aspiring MC became an RA, and after he met <a href="//allmusic.com/artist/hannibal-buress-mn0002463646" target="_blank">Hannibal Buress</a> the resident advisor and student became fast friends. Grad school brought him to the West Coast, where he joined the <a href="//allmusic.com/artist/project-blowed-mn0000364679" target="_blank">Project Blowed</a> collective along with the group <a href="//allmusic.com/artist/thirsty-fish-mn0002003393" target="_blank">Thirsty Fish</a>.</p> -->
 				<p>In 2010 he went solo on Mush Records with <a href="//allmusic.com/album/unapologetic-art-rap-mw0001977562" target="_blank">Unapologetic Art Rap</a>, an album that featured college bud <a href="//allmusic.com/artist/buress-mn0002463646" target="_blank">Buress</a> along with left-field MCs like <a href="//allmusic.com/artist/busdriver-mn0000642728" target="_blank">Busdriver</a> and <a href="//allmusic.com/artist/serengeti-mn0002015792" target="_blank">Serengeti</a>. <a href="//allmusic.com/album/rappers-will-die-of-natural-causes-mw0002499806" target="_blank">Rappers Will Die of Natural Causes</a> followed a year later on the Hellfyre label; then he collaborated with producer <a href="//allmusic.com/artist/awkward-mn0003071560" target="_blank">Awkward</a> and issued <a href="//allmusic.com/album/4nml-hsptl-mw0002370085" target="_blank">4NML HSPTL</a> on Fake Four in 2012.</p>
 				<p>The Mello Music group released the aptly titled <a href="//allmusic.com/album/dark-comedy-mw0002678910" target="_blank">Dark Comedy</a> in 2014, the same year that Eagle submitted a track to The Ron and Fez Show, which the satellite radio talk show duo soon picked up as their theme song. He stuck with Mello for 2016's <a href="//allmusic.com/album/hella-personal-film-festival-mw0002912735" target="_blank">Hella Personal Film Festival</a>, an album recorded with U.K. producer <a href="//allmusic.com/artist/paul-white-mn0002141768" target="_blank">Paul White.</a></p>
 			</div>
@@ -153,6 +156,6 @@
 		<script src="js/SkyShader.js"></script>
 		<!-- <script src="js/dat.gui.min.js"></script> -->
 		<script src="js/initScene.js"></script>
-		<!-- <script src="js/initHead.js"></script> -->
+		<script src="js/initHead.js"></script>
 	</body>
 </html>

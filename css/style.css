@@ -26,7 +26,8 @@ h1 {
 	text-transform: uppercase;
 	font-family: 'Terminal', sans-serif;
 }
-#city {
+#city,
+#headMobile {
 	z-index: 0;
 	width: 100vw;
 	height: 100vh;
@@ -256,15 +257,22 @@ h2 {
 #about.visible {
 	left: 0;
 }
-#about #head {
-	max-width: 100%;
-	padding-bottom: 35px;
-}
 #about hr {
 	height: 5px;
 	border: none;
 	background: black;
 	margin-bottom: 42px;
+}
+#head-container {
+	width: 100%;
+	height: 300px;
+}
+#about #head {
+	display: block;
+	width: 100%;
+	height: 100%;
+	padding-bottom: 0;
+	margin-bottom: -3px;
 }
 #about #text {
 	padding: 0 25px;
@@ -410,35 +418,26 @@ h2 {
 	transform: translate(-50%, -50%);
 }
 #loader {
+	background-color: #c9a9a2;
 	position: absolute;
 	top: 0;
 	z-index: 8;
-	background-color: transparent;
+	/*background-color: transparent;*/
 	width: 100vw;
 	height: 100vh;
+	opacity: 1;
+	transition: 1s linear;
 }
 #indicator {
 	background-color: #fff;
 	width: 100vw;
 	height: 100vh;
-	font-size: 3rem;
+	font-size: 8rem;
 	text-align: center;
 	display: flex;
 	align-items: center;
-	justify-content: flex-end;
+	justify-content: center;
 	transition: 20ms ease-in-out;
-}
-/*.loadingbar {
-	height: 100vh;
-	width: 100vw;
-	z-index: -1;
-	background-color: #000;
-	top: 0;
-	left: 0;
-	position: absolute;
-}*/
-#percent {
-	padding-right: 5rem;
 }
 #helper_text {
 	display: none;
@@ -644,11 +643,8 @@ h2 {
 		opacity: 1;
 		pointer-events: auto;
 	}
-	#about #head {
-		display: block;
-		height: 300px;
-		width: 100%;
-		padding-bottom: 0;
+	#head-container {
+		margin: 0 auto 30px;
 	}
 	#about hr {
 		display: none;

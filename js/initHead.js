@@ -8,20 +8,23 @@
 	var windowHalfY = $("#head").height() / 2;
 
 
-	init();
-	animate();
+	initHead();
+	animateHead();
 
 
-	function init() {
-
-		cameraHead = new THREE.PerspectiveCamera( 45, $('#head').width() / $('#head').height(), 1, 2000 );
+	function initHead() {
+		if ($(window).width() <= 900) {
+			cameraHead = new THREE.PerspectiveCamera( 45, $(window).width() / $(window).height(), 1, 2000 );
+		} else {
+			cameraHead = new THREE.PerspectiveCamera( 45, $('#head').width() / $('#head').height(), 1, 2000 );
+		}
 		cameraHead.position.z = 50;
 		cameraHead.position.y = -300;
 
 		// sceneHead
 
 		sceneHead = new THREE.Scene();
-		sceneHead.background = new THREE.Color( 0xFFFFFF );
+		sceneHead.background = new THREE.Color( 0x000000 );
 
 		var ambient = new THREE.AmbientLight( 0xFFFFFF );
 		sceneHead.add( ambient );
@@ -37,14 +40,21 @@
 
 			console.log( item, loaded, total );
 
-		};
 
+		};
+		var percentage = document.getElementById("percent");
+		var loadingScreen = document.getElementById("loader");
+		var indicator = document.getElementById("indicator");
 		var texture = new THREE.Texture();
 
 		var onProgress = function ( xhr ) {
+			
 			if ( xhr.lengthComputable ) {
 				var percentComplete = xhr.loaded / xhr.total * 100;
-				console.log( Math.round(percentComplete, 2) + '% downloaded' );
+				var p = Math.round(percentComplete);
+				percentage.innerHTML = p + '%';
+				// console.log( Math.round(percentComplete, 2) + '% downloaded' );
+				
 			}
 		};
 
@@ -61,17 +71,28 @@
 		} );
 
 		var mtlLoader = new THREE.MTLLoader();
-		mtlLoader.setPath( 'models/' );
-		mtlLoader.load( 'ded.mtl', function( materials ) {
+		mtlLoader.setPath( 'models/head2/' );
+		mtlLoader.load( 'HEAD1_copy.mtl', function( materials ) {
 			materials.preload();
 
 			var objLoader = new THREE.OBJLoader();
 			objLoader.setMaterials( materials );
-			objLoader.setPath( 'models/' );
-			objLoader.load( 'ded.obj', function( object ) {
-				object.position.y = 0;
+			objLoader.setPath( 'models/head2/' );
+			objLoader.load( 'HEAD1_copy.OBJ', function( object ) {
+				object.position.y = -5;
 				sceneHead.add( object );
-			}, onProgress, onError );
+			}, 
+			function() {
+				percentage.innerHTML = '100%';
+				setTimeout(
+					function() {
+						loadingScreen.style.opacity = '0';
+						loadingScreen.style.visibility = 'hidden';
+					}, 1500
+				);
+			},
+			onProgress, 
+			onError );
 
 		});
 
@@ -87,23 +108,41 @@
 
 
 		//
-
-		rendererHead = new THREE.WebGLRenderer({
-			canvas: head,
-			antialias: false
-		});
-		rendererHead.setPixelRatio( window.devicePixelRatio );
-		rendererHead.setSize( $('#head').width(), $('#head').height() );
+		if ($(window).width() <= 900) {
+			rendererHead = new THREE.WebGLRenderer({
+				canvas: headMobile,
+				antialias: false
+			});
+			rendererHead.setPixelRatio( window.devicePixelRatio );
+			rendererHead.setSize( $(window).width(), $(window).height() );
+		} else {
+			rendererHead = new THREE.WebGLRenderer({
+				canvas: head,
+				antialias: false
+			});
+			rendererHead.setPixelRatio( window.devicePixelRatio );
+			rendererHead.setSize( $('#head-container').width(), $('#head-container').height() );
+		}
+			
 		// container.appendChild( rendererHead.domElement );
 
-		document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+		document.addEventListener( 'mousemove', onDocumentMouseMoveHead, false );
 
 		//
 
 		// window.addEventListener( 'resize', onWindowResize, false );
 
 	}
-
+	if ($(window).width() < 900) {
+		window.addEventListener('resize', function() {
+			var width = window.innerWidth;
+			var height = window.innerHeight;
+			rendererHead.setSize(width, height);
+			cameraHead.aspect = width / height;
+			cameraHead.updateProjectionMatrix();
+		});
+	}
+	
 	// function onWindowResize() {
 
 	// 	windowHalfX = window.innerWidth / 2;
@@ -116,7 +155,7 @@
 
 	// }
 
-	function onDocumentMouseMove( event ) {
+	function onDocumentMouseMoveHead( event ) {
 
 		mouseXHead = ( event.clientX - windowHalfX ) / 2;
 		mouseYHead = ( event.clientY - windowHalfY ) / 2;
@@ -125,17 +164,17 @@
 
 	//
 
-	function animate() {
+	function animateHead() {
 
-		requestAnimationFrame( animate );
-		render();
+		requestAnimationFrame( animateHead );
+		renderHead();
 
 	}
 
-	function render() {
+	function renderHead() {
 
-		cameraHead.position.x += ( mouseXHead - cameraHead.position.x ) * .05;
-		cameraHead.position.y += ( - mouseYHead - cameraHead.position.y ) * .05;
+		cameraHead.position.x += ( - mouseXHead - cameraHead.position.x ) * .05;
+		cameraHead.position.y += ( mouseYHead - cameraHead.position.y ) * .05;
 
 		cameraHead.lookAt( sceneHead.position );
 
