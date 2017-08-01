@@ -85,23 +85,30 @@
 			var objLoader = new THREE.OBJLoader();
 			objLoader.setMaterials( materials );
 			objLoader.setPath( 'models/head2/' );
-			objLoader.load( 'HEAD1_copy.OBJ', function( object ) {
-				object.position.y = -5;
-				sceneHead.add( object );
-			}, 
-			function() {
-				if ( $(window).width() <= 900 ) {
-					percentage.innerHTML = '100%';
-					setTimeout(
-						function() {
-							loadingScreen.style.opacity = '0';
-							loadingScreen.style.visibility = 'hidden';
-						}, 1500
-					);
-				}
-			},
-			onProgress, 
-			onError );
+			objLoader.load( 
+				'HEAD1_copy.OBJ', 
+				function( object ) {
+					object.position.y = -5;
+					sceneHead.add( object );
+
+					// dae = object.scene;
+					// dae.traverse( function(child) {
+					// });
+					// sceneHead.add( dae );
+				}, 
+				function() {
+					if ( $(window).width() <= 900 ) {
+						percentage.innerHTML = '100%';
+						setTimeout(
+							function() {
+								loadingScreen.style.opacity = '0';
+								loadingScreen.style.visibility = 'hidden';
+							}, 1500
+						);
+					}
+				},
+				onProgress, 
+				onError );
 
 		});
 
@@ -136,7 +143,7 @@
 		// container.appendChild( rendererHead.domElement );
 
 		document.addEventListener( 'mousemove', onDocumentMouseMoveHead, false );
-
+		window.addEventListener('deviceorientation', sceneHead, !0)
 		//
 
 		// window.addEventListener( 'resize', onWindowResize, false );
@@ -151,6 +158,8 @@
 			cameraHead.updateProjectionMatrix();
 		});
 	}
+
+	
 	
 	// function onWindowResize() {
 

@@ -435,7 +435,7 @@ h2 {
 	background-color: #fff;
 	width: 100vw;
 	height: 100vh;
-	font-size: 8rem;
+	font-size: 18rem;
 	text-align: center;
 	display: flex;
 	align-items: center;
@@ -665,6 +665,12 @@ h2 {
 		max-height: 164px;
 	}
 }
+/* LARGE TEXT RESPONSITIVITY */
+@media (max-width: 575px) {
+	#indicator {
+		font-size: 12rem;
+	}
+}
 /* iPhone 5s & smaller phones */
 @media (max-width: 374px) {
 	h1 {
@@ -676,5 +682,8 @@ h2 {
 	}
 	#navigation nav a {
 		font-size: 50px;
+	}
+	#indicator {
+		font-size: 7rem;
 	}
 }
