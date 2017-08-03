@@ -91,6 +91,7 @@ THREE.DeviceOrientationControls = function( object ) {
 		setObjectQuaternion( scope.object.quaternion, alpha, beta, gamma, orient );
 		this.alpha = alpha;
 
+
 	};
 
 	this.updateAlphaOffsetAngle = function( angle ) {

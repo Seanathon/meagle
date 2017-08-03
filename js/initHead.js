@@ -1,8 +1,8 @@
 
 
 	var cameraHead, sceneHead, rendererHead;
-	var controls;
 	var windowHalfX, windowHalfY;
+	var controls, dae;
 	var mouseXHead = 0, mouseYHead = 0;
 
 	if ($(window).width() <= 900) {
@@ -18,14 +18,17 @@
 
 
 	function initHead() {
+
 		if ($(window).width() <= 900) {
 			cameraHead = new THREE.PerspectiveCamera( 45, $(window).width() / $(window).height(), 1, 2000 );
-			controls = new THREE.DeviceOrientationControls( cameraHead );
+			cameraHead.position.z = 50;
+			
 		} else {
 			cameraHead = new THREE.PerspectiveCamera( 45, $('#head').width() / $('#head').height(), 1, 2000 );
+			cameraHead.position.z = 50;
+			cameraHead.position.y = -300;
 		}
-		cameraHead.position.z = 50;
-		cameraHead.position.y = -300;
+			
 
 		// sceneHead
 
@@ -69,13 +72,13 @@
 		};
 
 
-		var loader = new THREE.ImageLoader( manager );
-		loader.load( 'models/ded.mtl', function ( image ) {
+		// var loader = new THREE.ImageLoader( manager );
+		// loader.load( 'models/head2/ded.mtl', function ( image ) {
 
-			texture.image = image;
-			texture.needsUpdate = true;
+		// 	texture.image = image;
+		// 	texture.needsUpdate = true;
 
-		} );
+		// } );
 
 		var mtlLoader = new THREE.MTLLoader();
 		mtlLoader.setPath( 'models/head2/' );
@@ -88,13 +91,15 @@
 			objLoader.load( 
 				'HEAD1_copy.OBJ', 
 				function( object ) {
-					object.position.y = -5;
+					console.log( object.children[0] );
 					sceneHead.add( object );
-
-					// dae = object.scene;
+					dae = object.children[0];
 					// dae.traverse( function(child) {
+					// 	child.castShadow = true;
+					// 	child.receiveShadow = true;
 					// });
-					// sceneHead.add( dae );
+					dae.position.y = -5;
+					sceneHead.add( dae );
 				}, 
 				function() {
 					if ( $(window).width() <= 900 ) {
@@ -111,7 +116,7 @@
 				onError );
 
 		});
-
+		
 		// var loader = new THREE.ColladaLoader();
 		// loader.options.convertUpAxis = true;
 		// loader.load(
@@ -122,7 +127,7 @@
 		// 	}
 		// );
 
-
+		// console.log(sceneHead.children);
 		//
 		if ($(window).width() <= 900) {
 			rendererHead = new THREE.WebGLRenderer({
@@ -143,12 +148,10 @@
 		// container.appendChild( rendererHead.domElement );
 
 		document.addEventListener( 'mousemove', onDocumentMouseMoveHead, false );
-		window.addEventListener('deviceorientation', sceneHead, !0)
-		//
-
 		// window.addEventListener( 'resize', onWindowResize, false );
 
 	}
+
 	if ($(window).width() < 900) {
 		window.addEventListener('resize', function() {
 			var width = window.innerWidth;
@@ -158,8 +161,27 @@
 			cameraHead.updateProjectionMatrix();
 		});
 	}
-
 	
+
+	function handleOrientation( event ) {
+		var z    = event.alpha;
+		var x    = event.beta - 90;
+		var y    = event.gamma;
+
+		if (x >  90) { x =  90};
+  		if (x < -90) { x = -90};
+		// var alphaRotation = alpha ? alpha * (Math.PI / 1200 ) : 0;
+		// var yRotation = y ? y * (Math.PI / 270) : 0;
+		// var xRotation = -x ? -(x - 85) * (Math.PI / 360) : 0;
+		var yRotation = y ? THREE.Math.degToRad(y): 0;
+		var xRotation = x ? THREE.Math.degToRad(x) : 0;
+		// console.log(sceneHead.children[3]);
+		console.log("x: " + xRotation + " y:" + yRotation);
+		sceneHead.children[3].rotation.y = yRotation;
+		sceneHead.children[3].rotation.x = xRotation;
+		// sceneHead.children[3].rotation.z = alphaRotation;
+	}
+	window.addEventListener("deviceorientation", handleOrientation);
 	
 	// function onWindowResize() {
 
@@ -192,16 +214,16 @@
 	}
 
 	function renderHead() {
-
-		cameraHead.position.x += ( - mouseXHead - cameraHead.position.x ) * .05;
-		cameraHead.position.y += ( mouseYHead - cameraHead.position.y ) * .05;
+		if ($(window).width() > 900) {
+			cameraHead.position.x += ( - mouseXHead - cameraHead.position.x ) * .05;
+			cameraHead.position.y += ( mouseYHead - cameraHead.position.y ) * .05;
+		}
+		
 
 		// cameraHead.position.x += ( mouseXHead - cameraHead.position.x ) * .05;
 		// cameraHead.position.y += ( - mouseYHead - cameraHead.position.y ) * .05;		
 
 		cameraHead.lookAt( sceneHead.position );
-
 		rendererHead.render( sceneHead, cameraHead );
 
 	}
-
