@@ -38,9 +38,9 @@
 		var ambient = new THREE.AmbientLight( 0xFFFFFF );
 		sceneHead.add( ambient );
 
-		var directionalLight = new THREE.DirectionalLight( 0xffeedd );
-		directionalLight.position.set( 0, 0, 1 );
-		sceneHead.add( directionalLight );
+		// var directionalLight = new THREE.DirectionalLight( 0xffeedd );
+		// directionalLight.position.set( 0, 0, 1 );
+		// sceneHead.add( directionalLight );
 
 		// texture
 
@@ -72,24 +72,32 @@
 		};
 
 
-		// var loader = new THREE.ImageLoader( manager );
-		// loader.load( 'models/head2/ded.mtl', function ( image ) {
+		var loader = new THREE.ImageLoader( manager );
+		loader.load( 'models/head/mike55.mtl', function ( image ) {
 
-		// 	texture.image = image;
-		// 	texture.needsUpdate = true;
+			texture.image = image;
+			texture.needsUpdate = true;
 
-		// } );
+		} );
 
 		var mtlLoader = new THREE.MTLLoader();
-		mtlLoader.setPath( 'models/head2/' );
-		mtlLoader.load( 'HEAD1_copy.mtl', function( materials ) {
+		mtlLoader.setPath( 'models/head/' );
+		mtlLoader.load( 'mike55.mtl', function( materials ) {
 			materials.preload();
+
+			for ( key in materials.materials ) { 
+				if ( materials.materials[key].map != null ) { 
+					materials.materials[key].color.r = 1; 
+					materials.materials[key].color.g = 1; 
+					materials.materials[key].color.b = 1; 
+				}
+			}
 
 			var objLoader = new THREE.OBJLoader();
 			objLoader.setMaterials( materials );
-			objLoader.setPath( 'models/head2/' );
+			objLoader.setPath( 'models/head/' );
 			objLoader.load( 
-				'HEAD1_copy.OBJ', 
+				'head_final.obj', 
 				function( object ) {
 					console.log( object.children[0] );
 					sceneHead.add( object );
@@ -98,6 +106,7 @@
 					// 	child.castShadow = true;
 					// 	child.receiveShadow = true;
 					// });
+					object.position.y = -5;
 					dae.position.y = -5;
 					sceneHead.add( dae );
 				}, 
@@ -120,14 +129,28 @@
 		// var loader = new THREE.ColladaLoader();
 		// loader.options.convertUpAxis = true;
 		// loader.load(
-		// 	'models/mikehead-small.dae', 
+		// 	'models/head/head_final.dae', 
 		// 	function ( collada ) {
 		// 		var object = collada.scene;
 		// 		sceneHead.add( object );
-		// 	}
+		// 		object.position.z = 0;
+		// 	},
+		// 	function() {
+		// 			if ( $(window).width() <= 900 ) {
+		// 				percentage.innerHTML = '100%';
+		// 				setTimeout(
+		// 					function() {
+		// 						loadingScreen.style.opacity = '0';
+		// 						loadingScreen.style.visibility = 'hidden';
+		// 					}, 1500
+		// 				);
+		// 			}
+		// 		},
+		// 	onProgress,
+		// 	onError
 		// );
 
-		// console.log(sceneHead.children);
+		console.log(sceneHead.children);
 		//
 		if ($(window).width() <= 900) {
 			rendererHead = new THREE.WebGLRenderer({
