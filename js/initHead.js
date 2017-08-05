@@ -33,7 +33,7 @@
 		// sceneHead
 
 		sceneHead = new THREE.Scene();
-		sceneHead.background = new THREE.Color( 0x000000 );
+		sceneHead.background = new THREE.Color( 0xFFFFFF );
 
 		var ambient = new THREE.AmbientLight( 0xFFFFFF );
 		sceneHead.add( ambient );
@@ -73,7 +73,7 @@
 
 
 		var loader = new THREE.ImageLoader( manager );
-		loader.load( 'models/head/mike55.mtl', function ( image ) {
+		loader.load( 'models/head/head_final.mtl', function ( image ) {
 
 			texture.image = image;
 			texture.needsUpdate = true;
@@ -82,7 +82,7 @@
 
 		var mtlLoader = new THREE.MTLLoader();
 		mtlLoader.setPath( 'models/head/' );
-		mtlLoader.load( 'mike55.mtl', function( materials ) {
+		mtlLoader.load( 'head_final.mtl', function( materials ) {
 			materials.preload();
 
 			for ( key in materials.materials ) { 
@@ -101,14 +101,14 @@
 				function( object ) {
 					console.log( object.children[0] );
 					sceneHead.add( object );
-					dae = object.children[0];
+					// dae = new THREE.Object3D();
 					// dae.traverse( function(child) {
 					// 	child.castShadow = true;
 					// 	child.receiveShadow = true;
 					// });
 					object.position.y = -5;
-					dae.position.y = -5;
-					sceneHead.add( dae );
+					// dae.position.y = -5;
+					// sceneHead.add( dae );
 				}, 
 				function() {
 					if ( $(window).width() <= 900 ) {
@@ -200,8 +200,8 @@
 		var xRotation = x ? THREE.Math.degToRad(x) : 0;
 		// console.log(sceneHead.children[3]);
 		console.log("x: " + xRotation + " y:" + yRotation);
-		sceneHead.children[3].rotation.y = yRotation;
-		sceneHead.children[3].rotation.x = xRotation;
+		sceneHead.children[1].rotation.y = -yRotation;
+		sceneHead.children[1].rotation.x = -xRotation;
 		// sceneHead.children[3].rotation.z = alphaRotation;
 	}
 	window.addEventListener("deviceorientation", handleOrientation);

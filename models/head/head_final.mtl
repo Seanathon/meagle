@@ -1,0 +1,31 @@
+# 
+# Wavefront material file
+# Created with Kaydara FBX
+# 
+
+newmtl blinn2SG
+map_Kd hairtexture.jpg
+Ka 0.000000 0.000000 0.000000
+Kd 0.174757 0.174757 0.174757
+illum 1
+Tr 1.000000
+
+newmtl lambert2SG
+Ka 0.000000 0.000000 0.000000
+Kd 0.070000 0.070000 0.070000
+illum 1
+Tr 1.000000
+
+newmtl blinn4SG
+map_Kd eye.BMP
+Ka 0.000000 0.000000 0.000000
+Kd 0.000000 0.000000 0.000000
+illum 1
+Tr 1.000000
+
+newmtl blinn5SG
+map_Kd colorface.jpg
+Ka 0.000000 0.000000 0.000000
+Kd 0.000000 0.000000 0.000000
+illum 1
+Tr 1.000000
