@@ -19,9 +19,24 @@
 
 	function initHead() {
 
+		// sceneHead
+
+		sceneHead = new THREE.Scene();
+		if ($(window).width() <= 900) {
+			sceneHead.background = new THREE.Color( 0xe6e6e8 );
+		} else {
+			sceneHead.background = new THREE.Color( 0xFFFFFF );
+		}
+
+		var ambient = new THREE.AmbientLight( 0xFFFFFF );
+		sceneHead.add( ambient );
+
+
 		if ($(window).width() <= 900) {
 			cameraHead = new THREE.PerspectiveCamera( 45, $(window).width() / $(window).height(), 1, 2000 );
 			cameraHead.position.z = 50;
+
+			
 			
 		} else {
 			cameraHead = new THREE.PerspectiveCamera( 45, $('#head').width() / $('#head').height(), 1, 2000 );
@@ -29,15 +44,9 @@
 			cameraHead.position.y = -300;
 		}
 			
+		
 
-		// sceneHead
-
-		sceneHead = new THREE.Scene();
-		sceneHead.background = new THREE.Color( 0xFFFFFF );
-
-		var ambient = new THREE.AmbientLight( 0xFFFFFF );
-		sceneHead.add( ambient );
-
+		
 		// var directionalLight = new THREE.DirectionalLight( 0xffeedd );
 		// directionalLight.position.set( 0, 0, 1 );
 		// sceneHead.add( directionalLight );
@@ -106,7 +115,11 @@
 					// 	child.castShadow = true;
 					// 	child.receiveShadow = true;
 					// });
-					object.position.y = -5;
+					if ( $(window).width() <= 900 ) {
+						object.position.y = -7;
+					} else {
+						object.position.y = -5;
+					}
 					// dae.position.y = -5;
 					// sceneHead.add( dae );
 				}, 
@@ -222,9 +235,19 @@
 		// console.log(event.clientX + " window: " + windowHalfX);
 		// console.log(event.clientY + " window: " + windowHalfY);
 
+
+
 		mouseXHead = ( event.clientX - windowHalfX ) / 2;
 		mouseYHead = ( event.clientY - windowHalfY ) / 2;
 
+		if (mouseXHead >  15) { mouseXHead =  15};
+  		if (mouseXHead < -15) { mouseXHead = -15};
+
+  		if (mouseYHead >  15) { mouseYHead =  15};
+  		if (mouseYHead < -15) { mouseYHead = -15};
+
+
+		// console.log("x: " + mouseXHead + "y: " + mouseYHead);
 	}
 
 	//

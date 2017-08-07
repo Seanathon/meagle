@@ -254,31 +254,45 @@ if ($(window).width() > 900) {
 		} else if ( obj.name === 's_STORE' ) {
 			textElement.innerHTML = "<span>SHOP</span>";
 			obj.url = "shop";
-		} 
-		console.log(obj.url);
+		} else if ( obj.name === 's_SIGN') {
+			textElement.innerHTML = "";
+			obj.url = "https://www.youtube.com/watch?v=Xxn9-IPJsS4&t=61s";
+		} else if ( obj.name === 's_MERRY') {
+			textElement.innerHTML = "";
+			obj.url = "https://www.youtube.com/watch?v=bSuvOVH0aSQ";
+		// } else if ( obj.name === 's_UBUILDINGS') {
+		// 	textElement.innerHTML = "";
+		// 	obj.url = "https://www.youtube.com/watch?v=k--Gs1veNYE&t=17s";
+		} else if ( obj.name ==='s_BIKE' ) {
+			textElement.innerHTML = "<span>TOUR</span>";
+			obj.url = "http://mikeeaglestinks.tumblr.com/post/89666128320/dates-locations-rap-shows";
+		}
+		obj.userData.elevated = true
+		// console.log(obj.url);
 		// this.addEventListener("click", function() {
 		// 	window.open(buildingURL, "_blank");
 		// });
 			//obj.parent.userData.hovered = true
-		new TWEEN.Tween( obj.position ).to( { y: [point] }, 400 )
-		.easing( TWEEN.Easing.Quadratic.Out)
-		.onComplete(function() {
-			obj.userData.elevated = true
-		})
-		.start();
+		// new TWEEN.Tween( obj.position ).to( { y: [point] }, 400 )
+		// .easing( TWEEN.Easing.Quadratic.Out)
+		// .onComplete(function() {
+		// 	obj.userData.elevated = true
+		// })
+		// .start();
 	};
 
 	var bounceDown = function(obj) {
 		globalContact = false;
 		document.body.style.cursor = "default";
 	 	textElement.className = "";
+	 	textElement.innerHTML = "";
 		obj.userData.elevated = false
-		new TWEEN.Tween( obj.position ).to( { y: [obj.userData.baseY] }, 1000 )
-		.easing( TWEEN.Easing.Quadratic.Out)
-		.onComplete(function() {
+		// new TWEEN.Tween( obj.position ).to( { y: [obj.userData.baseY] }, 1000 )
+		// .easing( TWEEN.Easing.Quadratic.Out)
+		// .onComplete(function() {
 			 
-		})
-		.start();
+		// })
+		// .start();
 	};
 
 	render = function() {
@@ -339,19 +353,8 @@ if ($(window).width() > 900) {
 		for (i in intersectable) {
 			var obj = intersectable[i];
 			if (obj.userData.hovered == true) {
-				
-				if ( obj.name === 'S_MERRY' ) {
-					textElement.innerHTML = " ";
-					new TWEEN.Tween( obj.rotation ).to( { y: "+1000" }, 500 )
-					.easing( TWEEN.Easing.Quadratic.Out)
-					.onComplete(function() {
-						obj.userData.elevated = true
-					}).start();
-				} else {
-					bounce(obj, 600);
-				}
-			}
-			else if (INTERSECTED != null && obj.userData.hovered == false && obj.userData.elevated == true && obj != INTERSECTED.parent) { 
+				bounce(obj, 600);
+			} else if (INTERSECTED != null && obj.userData.hovered == false && obj.userData.elevated == true && obj != INTERSECTED.parent) { 
 				bounceDown(obj);
 			} 
 
